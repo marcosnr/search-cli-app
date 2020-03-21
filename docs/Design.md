@@ -56,3 +56,23 @@ In the Sketch below you can see the overall Module roadmap:
 * Early integration
 * Early and clear documentation
 
+## Assumptions
+
+I asked for confirmation on the following, while I get feedback assuming:
+
+1. "full value matching is fine" assertion =  only full value match is accepted.
+
+e.g. returning "mary" when searching only for "mary" 
+will *NOT* return "mary", "Mary", "MarCos", "marc", "Amar" 
+
+2. Non Id Fields must exist
+e.g. App will check for:
+"description" : ""
+"description" : null
+But will not check if "description" exist at all in a given input
+
+3. assume I have access to the public Internet to download public libraries
+
+4. Overall, focusing on  the "Dev side of things". 
+Nonetheless, DevOps = Infrastructure-as-Code, and everything on the "Ops side of things"
+like pipelines, stages, connectivity, build, Security Scanning etc. can and should be coded / tested as well... just like a "functional code", and from day 0!
