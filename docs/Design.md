@@ -1,4 +1,6 @@
-# High level Design
+# High Level Design (HLD)
+
+Explanation of design decisions and overall roadmap for this app
 
 ## MVC Architecture
 
@@ -8,12 +10,12 @@ Model: Data layer with DAO Pattern abstraction for extensibility of Datasources
 
 ### Extensibility Modules
 
-By using the Interface -> Implements Pattern, Modules will be Implemented by the simplest possible representation, but later can be replaced by other implementation technologies without breaking the contract between modules. e.g.:
-DAO Interface will be implemented by a simple Data structure, can be backed by a more reliable DB Datasource in the future.
+By using the `Interface -> Implements` Pattern, Modules will be Implemented by the simplest possible representation, but later can be replaced by other implementation technologies without breaking the contract between modules. e.g.:
+DAO Interface will be implemented by a simple data structure (collections). It can be backed by a more reliable DB Datasource in the future with minimum impact to the other modules.
 
 ### Sketch Diagram
 
-In the Sketch below you can see the overall Module roadmap:
+In the Sketch below you can see the overall module architecture:
 
 ![Alt Module diagram](arch-sketch.png?raw=true "Module diagram")
 
@@ -21,7 +23,7 @@ In the Sketch below you can see the overall Module roadmap:
 
 1. Create Skeleton of Modules and check minimum search:
 - Unit tests
-- Simple CLI with test Stug data
+- Simple CLI with test Stub data
 - Main class to handle flow
 - DAO class to handle queries
 - Data stored in primitive variables 
@@ -30,15 +32,16 @@ In the Sketch below you can see the overall Module roadmap:
 - Load Data from given json files
 - basic Input / error validation
 
+3. Load testing 10k+ items
+
 (Nice to have if times allows)
 
-3. Build automation
+* Build automation
 
-4. Load testing 10k+ items
+* "Security job 0" principles as early as possible
 
-5. POC for Extensibility with in memory JsonDB/MongoDB interaction
+* POC for Extensibility with in memory JsonDB/MongoDB interaction
 
-6. Show security awareness as early as possible
 
 
 ## Architecture principles

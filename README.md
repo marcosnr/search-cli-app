@@ -13,6 +13,13 @@ Python 3 installed on *Nix machine (Linux, Mac)
 make install 
 ```
 
+## Test Coverage
+
+```bash
+pipenv shell
+PYTHONPATH=app:$PYTHONPATH pytest
+```
+
 ## Design principles and Roadmap
 
 See: [/docs/Design.md](/docs/Design.md)
