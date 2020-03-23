@@ -15,3 +15,6 @@ class DataLoader:
     Keyword arguments:
     uri -- full or relative resource path and json file name
     """
+    with open(uri, 'r') as f:
+      json_dict = json.load(f)
+    return json_dict
