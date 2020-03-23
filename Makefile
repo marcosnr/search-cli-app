@@ -17,6 +17,10 @@ install: ## installs / updates required libraries
 	pipenv install --dev
 	$(info [+] activate by running 'pipenv shell'")
 
-test: ## run included test suite
+test: ## runs included test suite
 	$(info [+] running tests...")
 	pipenv run pytest
+
+lint: ## linting of code base for good practices
+	$(info [+] linting with flake8...")
+	pipenv run flake8 app
