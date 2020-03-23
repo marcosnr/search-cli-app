@@ -19,30 +19,6 @@ In the Sketch below you can see the overall module architecture:
 
 ![Alt Module diagram](arch-sketch.png?raw=true "Module diagram")
 
-## Road Map
-
-1. Create Skeleton of Modules and check minimum search:
-- Unit tests
-- Simple CLI with test Stub data
-- Main class to handle flow
-- DAO class to handle queries
-- Data stored in primitive variables 
-
-2. Enhance with better I/O and validation
-- Load Data from given json files
-- basic Input / error validation
-
-3. Load testing 10k+ items
-
-(Nice to have if times allows)
-
-* Build automation
-
-* "Security job 0" principles as early as possible
-
-* POC for Extensibility with in memory JsonDB/MongoDB interaction
-
-
 
 ## Architecture principles
 
@@ -61,7 +37,7 @@ In the Sketch below you can see the overall module architecture:
 
 ## Assumptions
 
-I asked for confirmation on the following, while I get feedback assuming:
+I asked for confirmation on the following, decided to go ahead assuming:
 
 1. "full value matching is fine" assertion =  only full value match is accepted.
 
@@ -74,8 +50,40 @@ e.g. App will check for:
 "description" : null
 But will not check if "description" exist at all in a given input
 
-3. assume I have access to the public Internet to download public libraries
+3. Assume I have access to the public Internet to download public libraries
 
 4. Overall, focusing on  the "Dev side of things". 
 Nonetheless, DevOps = Infrastructure-as-Code, and everything on the "Ops side of things"
 like pipelines, stages, connectivity, build, Security Scanning etc. can and should be coded / tested as well... just like a "functional code", and from day 0!
+
+## Road Map
+
+1. Create Skeleton of Modules and check minimum search:
+- Unit tests
+- Simple CLI with test Stub data
+- Main class to handle flow
+- DAO class to handle queries
+- Data stored in primitive variables
+- Linting
+
+2. Enhance with better I/O and validation
+- Load Data from given json files
+- basic Input / error validation
+
+3. MVP of search capabilities
+- Return full match on query of one simple item
+- Association of list of items according to FKs 
+- Return all related items for a hit
+
+4. Load testing 10k+ items
+
+(Nice to have if times allows)
+
+* Build automation
+
+* "Security job 0" principles as early as possible
+
+* POC for Extensibility with in memory:
+  - [Marshmellow](https://marshmallow.readthedocs.io/en/stable/nesting.html)
+  - JsonDB/MongoDB integration
+
