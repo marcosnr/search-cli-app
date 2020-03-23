@@ -1,3 +1,10 @@
+import logging
+import config
+
+logger = logging.getLogger()
+logger.setLevel(config.LOG_LEVEL)
+
+
 class OrganizationDAO:
   """ Simple Data Access Object Pattern implementation
   to support Accessing Organization type entities
