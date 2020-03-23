@@ -16,6 +16,11 @@ make install
 ## Test Coverage
 
 ```bash
+make test
+```
+
+If you want to run them interactively, you can:
+```bash
 pipenv shell
 PYTHONPATH=app:$PYTHONPATH pytest
 ```

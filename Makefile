@@ -19,3 +19,4 @@ install: ## installs / updates required libraries
 
 test: ## run included test suite
 	$(info [+] running tests...")
+	pipenv run pytest
