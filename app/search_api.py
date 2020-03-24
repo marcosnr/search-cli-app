@@ -21,5 +21,4 @@ class SearchAPI:
       if org['_id'] == org_id:
         logging.debug(f"Found {org['name']}")
         return org
-    else:
-      raise Exception(f"search_org_by_id: {org_id} not found in Datastore")
+    raise Exception(f"org_id: '{org_id}' not found in Datastore")

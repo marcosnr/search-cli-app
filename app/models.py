@@ -14,5 +14,5 @@ class OrganizationDAO:
     self.organizations = []
 
   def __str__(self):
-    """simple customised string representaion of this object"""
+    """simple customised string representation of this object"""
     return f"{len(self.organizations)}"

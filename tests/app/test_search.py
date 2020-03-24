@@ -1,43 +1,23 @@
 import pytest
 
-from search import SearchAPI
+from search import SearchApp
 from models import OrganizationDAO
 
 
 @pytest.fixture
-def search_data():
-  test_org_data =	 [
-    {
-      "_id": 101,
-      "url": "http://initech.zendesk.com/api/v2/organizations/101.json",
-      "external_id": "9270ed79-35eb-4a38-a46f-35725197ea8d",
-      "name": "Enthaze",
-      "domain_names": [
-        "kage.com",
-        "ecratic.com",
-        "endipin.com",
-        "zentix.com"
-      ],
-      "created_at": "2016-05-21T11:10:28 -10:00",
-      "details": "MegaCorp",
-      "shared_tickets": False,
-      "tags": [
-        "Fulton",
-        "West",
-        "Rodriguez",
-        "Farley"
-      ]
-    }
-  ]
-  test_org_dao = OrganizationDAO()
-  test_org_dao.organizations = test_org_data
-  search_data.org_dao = test_org_dao
-  #TODO expand later to Mocks / other daos
-  return search_data
+def app():
+  return SearchApp()
 
-def test_search_org_by_id(search_data):
-  org_result = SearchAPI.search_org_by_id(search_data.org_dao, 101)
-  assert type(org_result) is dict
+def test_search_init(app):
+  assert type(app.org_dao) is OrganizationDAO
+
+def test_search_load(app):
+  app.load_data()
+  assert app.validate_data() is True
+
+def test_search_org_by_id(app):
+  app.load_data()
+  org_result = app.search_organisations("_id", 102)
+  assert org_result['name'] == 'Nutralab'
   with pytest.raises(Exception):
-    org_result = SearchAPI.search_org_by_id(search_data.org_dao, 102)
-
+    app.search_organisations("_id", 99)
