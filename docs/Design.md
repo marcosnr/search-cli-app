@@ -22,11 +22,11 @@ In the Sketch below you can see the overall module architecture:
 
 ## Architecture principles
 
-1. Extensibility - separation of concerns.
-2. Simplicity - aim for the simplest solution that gets the job done whilst remaining readable, extensible and testable.
-3. Test Coverage - breaking changes should break your tests.
-4. Performance - should gracefully handle a significant increase in amount of data provided (e.g 10000+ users).
-5. Robustness - should handle and report errors.
+A. Extensibility - separation of concerns.
+B. Simplicity - aim for the simplest solution that gets the job done whilst remaining readable, extensible and testable.
+C. Test Coverage - breaking changes should break your tests.
+D. Performance - should gracefully handle a significant increase in amount of data provided (e.g 10000+ users).
+E. Robustness - should handle and report errors.
 
 ## Extra guidelines
 
