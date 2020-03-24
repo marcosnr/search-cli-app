@@ -18,7 +18,8 @@ class SearchAPI:
     """
     logging.info(f"search_org_by_id: {org_id}")
     for org in org_dao.organizations:
-      if org['_id'] == org_id:
+      logging.info(f"org: {org}")
+      if org['_id'] == int(org_id):
         logging.debug(f"Found {org['name']}")
         return org
-    raise Exception(f"org_id: '{org_id}' not found in Datastore")
+    raise Exception(f"org_id: {org_id} not found in Datastore")
