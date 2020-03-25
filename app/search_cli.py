@@ -12,16 +12,18 @@ logger.setLevel(config.LOG_LEVEL)
 def search_app():
   pass
 
-# search organizations --field '_id' --value 102
+
 @click.command(help='search inside an organization ticketing system')
 @click.option('--field', default='name', help='field name to search for')
 @click.option('--value', required=True, help='value to search in the given field')
-def organisations(field, value):
+@click.option('--export_format', default='yaml', help='format to show results (json | yaml | file)')
+def organisations(field, value, export_format):
 
-  logging.info(f"organisation by: field='{field}',value='{value}'")
+  logging.debug(f"organisation by: field='{field}',value='{value}'")
   app = SearchApp()
   app.load_data()
-  app.search_organisations(field, value)
+  results = app.search_organisations(field, value)
+  app.export(results, export_format)
 
 
 if __name__ == '__main__':

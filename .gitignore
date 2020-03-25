@@ -1,1 +1,3 @@
 .vscode
+search_results.json
+app/__pycache__/*

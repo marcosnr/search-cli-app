@@ -5,6 +5,8 @@ verify_ssl = true
 
 [packages]
 click = "*"
+beeprint = "*"
+pyyaml = "*"
 
 [dev-packages]
 flake8 = "*"

@@ -16,6 +16,9 @@ class DataLoader:
     Keyword arguments:
     uri -- full or relative resource path and json file name
     """
-    with open(uri, 'r') as f:
-      json_dict = json.load(f)
+    try:
+      with open(uri, 'r') as f:
+        json_dict = json.load(f)
+    except FileNotFoundError:
+      raise Exception("given json input file is not accessible")
     return json_dict

@@ -16,9 +16,8 @@ class SearchAPI:
     org_dao -- DAO to access organization data (OrganizationDAO)
     org_id -- unique id (Integer)
     """
-    logging.info(f"search_org_by_id: {org_id}")
+    logging.debug(f"search_org_by_id: {org_id}")
     for org in org_dao.organizations:
-      logging.info(f"org: {org}")
       if org['_id'] == int(org_id):
         logging.debug(f"Found {org['name']}")
         return org
