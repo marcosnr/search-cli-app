@@ -40,5 +40,20 @@
       "Fuentes",
       "Trevino"
     ]
+  },
+  {
+    "_id": 103,
+    "url": "http.:/invalid.url.com/103.json",
+    "external_id": "fake-uuid",
+    "name": "Plasmos",
+    "domain_names": [
+      "comvex.com",
+      "automon.com",
+      "verbus.com",
+      "gogol.com"
+    ],
+    "created_at": "2016-05-28T04:40:37 -10:00",
+    "details": "",
+    "tags": []
   }
 ]

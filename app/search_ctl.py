@@ -5,9 +5,11 @@ from data_exporter import DataExporter
 from models import OrganizationDAO
 from search_api import SearchAPI
 from validator import Validator
+from result_set import ResultSet
 
 logger = logging.getLogger()
 logger.setLevel(config.LOG_LEVEL)
+
 
 class SearchApp:
   """ Simple Search App Controller to offer basic queries capabilities
@@ -36,10 +38,7 @@ class SearchApp:
 
     logging.info(f"searching by: field='{key_name}',value='{value}'")
     Validator.validate_input(key_name, value)
-    org_result = SearchAPI.search_org_by_field(self.org_dao, key_name, value)
-    logging.debug(f"found: {org_result.item['name']}")
-    logging.debug(f"items: {org_result.item}")
-    return org_result
+    return SearchAPI.search_org_by_field(self.org_dao, key_name, value)
 
   def export(self, results, export_format):
     """Exports results
@@ -47,13 +46,18 @@ class SearchApp:
     Keyword arguments:
     results -- resource to export
     export_format -- export type format
-    """    
-    logging.debug(f"format: '{export_format}' ")
-    if export_format == 'json':
-      DataExporter.pretty_print(results.item)
-    elif export_format == 'yaml':
-      DataExporter.yaml_print(results.item)
-    elif export_format == 'file':
-      DataExporter.json_out(results.item)
+    """
+    if isinstance(results, ResultSet):
+      logging.debug(f"found: {results.item['name']}")
+      logging.debug(f"items: {results.item}")
+      logging.debug(f"format: '{export_format}' ")
+      if export_format == 'json':
+        DataExporter.pretty_print(results.item)
+      elif export_format == 'yaml':
+        DataExporter.yaml_print(results.item)
+      elif export_format == 'file':
+        DataExporter.json_out(results.item)
+      else:
+        raise Exception("Export format not supported")
     else:
-      raise Exception("Export format not supported")
+      print(f"Oops! {results}, want to try again?")

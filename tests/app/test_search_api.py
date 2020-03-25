@@ -20,7 +20,7 @@ def search_data():
         "zentix.com"
       ],
       "created_at": "2016-05-21T11:10:28 -10:00",
-      "details": "MegaCorp",
+      "details": "",
       "shared_tickets": False,
       "tags": [
         "Fulton",
@@ -43,12 +43,22 @@ def test_search_org_by_id(search_data):
     org_result = SearchAPI.search_org_by_id(search_data.org_dao, 102)
 
 def test_search_org_by_field(search_data):
-  org_result_set = SearchAPI.search_org_by_field(search_data.org_dao, "name","Enthaze")
-  # assert type(org_result_set) is ResultSet
+  org_result_set = SearchAPI.search_org_by_field(search_data.org_dao, "name", "Enthaze")
   assert isinstance(org_result_set, ResultSet)
   assert org_result_set.item['_id'] == 101
 
-def test_search_org_by_field_empty(search_data):
-  org_result_set = SearchAPI.search_org_by_field(search_data.org_dao, "name","ACME")
+def test_search_org_by_non_existent_field(search_data):
+  org_result_set = SearchAPI.search_org_by_field(search_data.org_dao, "name", "field_invalid")
   assert isinstance(org_result_set, DefaultResultSet)
-  assert org_result_set.query_value == 'ACME'
+  assert org_result_set.query_value == 'field_invalid'
+
+def test_search_org_by_empty_value(search_data):
+  org_result_set = SearchAPI.search_org_by_field(search_data.org_dao, "details", "")
+  assert isinstance(org_result_set, ResultSet)
+  assert org_result_set.item['name'] == 'Enthaze'
+
+def test_search_org_by_tags(search_data):
+  org_result_set = SearchAPI.search_org_by_field(search_data.org_dao, "domain_names", "zentix.com")
+  assert isinstance(org_result_set, ResultSet)
+  assert org_result_set.item['name'] == 'Enthaze'
+

@@ -34,7 +34,7 @@ class SearchAPI:
     field -- key field to search (String)
     search_value -- search value (String)
     """
-    logging.debug(f"{field}->? {search_value}")
+    logging.debug(f"'{field}' -> '{search_value}'?")
     if field == "_id":
       return SearchAPI.search_org_by_id(org_dao, search_value)
     for org in org_dao.organizations:
@@ -42,8 +42,14 @@ class SearchAPI:
       if value == 'None':
         # Assuming schema is flexible, so checking each org...
         continue
+      elif isinstance(value, list):
+        # search inside list, e.g. 'tags'
+        logging.debug(f"{field} is of list type")
+        for iter in value:
+          if iter == search_value:
+            return ResultSet(org, field, search_value)
       elif value == search_value:
-        logging.debug(f"Found {org['name']}")
         return ResultSet(org, field, search_value)
+
     logging.info(f"could not MATCH: '{search_value}' with any field: '{field}'")
     return DefaultResultSet(field, search_value)

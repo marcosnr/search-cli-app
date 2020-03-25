@@ -1,13 +1,14 @@
 CORE:
-find by ANY field in ANY org
-including if field is empty
+DONE find by ANY field in ANY org
+DONE including if field is empty
+DONE including in tags
 load users and assign to vector in orgdao
 same with tickets, vector in usersdao
 return tickets and users for org
 find by ANY field in users, tickets
-
+add readme does not support tags [] empty (I asked!)
 NOT_SO_CORE:
-show inheritance with EMPTY_RESULT_SET
+DONE show inheritance with EMPTY_RESULT_SET
 
 Validate:
 repeated items by id
