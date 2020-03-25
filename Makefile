@@ -1,7 +1,7 @@
 .PHONY: help test run
 PYTHON_INTERPRETER ?= $(shell which python)
 
-default: dependencies install test
+default: dependencies install test lint
 
 help: ## This help
 	@grep -E -h "^[a-zA-Z_-]+:.*?## " $(MAKEFILE_LIST) \
@@ -24,4 +24,4 @@ test: ## runs included test suite
 lint: ## linting of code base for good practices
 	$(info [+] linting with flake8 ...")
 	# E111,E114 identention too verbose
-	pipenv run flake8 app --ignore=E111,E114 
+	pipenv run flake8 app --ignore=E111,E114

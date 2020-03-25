@@ -44,10 +44,11 @@ use mocks
 
 enhancements:
 search by time range
-code more DRY 
+code more DRY
+cli tests capturing ouptut print
 
 README:
 
 complete setup
-complete usage and assumptions
+complete usage and assumptions: returns only first hit
 Why logging, security, ci is job 0, bandit, commit signed

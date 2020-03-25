@@ -31,5 +31,12 @@ class Validator:
     if key_name == '':
       logging.info(f"using '{config.DEFAULT_ORG_KEY_NAME}' as default field")
       key_name = config.DEFAULT_ORG_KEY_NAME
+    if isinstance(value, str):
+      if value.lower() == 'true':
+        logging.info(f"transforming 'true' text boolean input")
+        value = True
+      elif value.lower() == 'false':
+        logging.info(f"transforming 'false' text boolean input")
+        value = False
     if value is None:
       raise Exception("search value is invalid / null")

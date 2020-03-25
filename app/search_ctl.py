@@ -76,4 +76,4 @@ class SearchApp:
       else:
         raise Exception("Export format not supported")
     else:
-      print(f"Oops! {results}, want to try again?")
+      print(f"Oops! {results} found, want to try again?")
