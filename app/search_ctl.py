@@ -24,13 +24,30 @@ class SearchApp:
     self.users_uri = config.DEFAULT_USER_DATA
     self.user_dao = UserDAO()
 
+  def link_users(self):
+    """Link users to their respective organizations"""
+    logging.debug("linking users with organizations...")
+    for user in self.user_dao.users:
+      for org in self.org_dao.organizations:
+        try:
+          org = SearchAPI.search_org_by_id(self.org_dao, user.get("organization_id"))
+          logging.debug(f"linking {user['name']} -> {org['name']}")
+          logging.debug(f"org..> '{org}'")
+          logging.debug(f"done..? '{org.get('users')}'")
+          org['users'].append(user)
+        except Exception as e:
+          logging.error(f"{e}, can't link user id {user['_id']}")
+          logging.error(f"{user['_id']} has invalid organization_id: {user['organization_id']}")
+          self.user_dao.users.remove(user)
+
   def load_data(self):
     """Load data sources in memory"""
-    logging.debug("loading default json input files...")
+    logging.debug("loading all default json input files...")
     self.org_dao.organizations = DataLoader._load_file(self.organizations_uri)
     Validator.validate_org_data(self.org_dao)
     self.user_dao.users = DataLoader._load_file(self.users_uri)
     Validator.validate_user_data(self.user_dao)
+    self.link_users()
 
   def search_organisations(self, key_name, value):
     """Search organizations by all fields

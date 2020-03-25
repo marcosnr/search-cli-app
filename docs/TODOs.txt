@@ -5,7 +5,7 @@ DONE including in tags
 DONE Load users and find by ID
 DONE find by ANY field in users
 DONE including boolean  "suspended": 'True'
-users assign to vector in orgdao and return users when search for org
+DONE users assign to vector in orgdao and return users when search for org
 return org when searching for user
 
 Load tickets and find by ID
@@ -15,13 +15,16 @@ return org when searching for ticket
 tickets assign to vector in orgdao and return tickets when search for org
 find by ANY field in tickets, returning org and users as well
 
+check FKs are present at load time
 add readme does not support tags [] empty (I asked!)
 check export to json (no test)
 check if result too big default to json file
 
 NOT_SO_CORE:
+search for a user field inside an org (recursive search)
 complete tests for validator and ctl
 DONE show inheritance with EMPTY_RESULT_SET
+ask if needs only name id or full result (for org would be big result)
 Validate:
 repeated items by id
 id string is number is UUID xcheck

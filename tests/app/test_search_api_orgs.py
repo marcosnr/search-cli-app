@@ -36,9 +36,9 @@ def search_data():
   return search_data
 
 def test_search_org_by_id(search_data):
-  org_result_set = SearchAPI.search_org_by_id(search_data.org_dao, 101)
-  assert isinstance(org_result_set, ResultSet)
-  assert org_result_set.item['name'] == 'Enthaze'
+  org = SearchAPI.search_org_by_id(search_data.org_dao, 101)
+  assert isinstance(org, dict)
+  assert org['name'] == 'Enthaze'
   with pytest.raises(Exception):
     org_result = SearchAPI.search_org_by_id(search_data.org_dao, 102)
 
@@ -54,11 +54,6 @@ def test_search_org_by_non_existent_field(search_data):
 
 def test_search_org_by_empty_value(search_data):
   org_result_set = SearchAPI.search_org_by_field(search_data.org_dao, "details", "")
-  assert isinstance(org_result_set, ResultSet)
-  assert org_result_set.item['name'] == 'Enthaze'
-
-def test_search_org_by_list_field(search_data):
-  org_result_set = SearchAPI.search_org_by_field(search_data.org_dao, "domain_names", "zentix.com")
   assert isinstance(org_result_set, ResultSet)
   assert org_result_set.item['name'] == 'Enthaze'
 

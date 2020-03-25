@@ -67,9 +67,9 @@ def search_data():
   return search_data
 
 def test_search_user_by_id(search_data):
-  user_result_set = SearchAPI.search_user_by_id(search_data.user_dao, 2)
-  assert isinstance(user_result_set, ResultSet)
-  assert user_result_set.item['name'] == 'Cross Barlow'
+  user = SearchAPI.search_user_by_id(search_data.user_dao, 2)
+  assert isinstance(user, dict)
+  assert user['name'] == 'Cross Barlow'
   with pytest.raises(Exception):
     user_result = SearchAPI.search_user_by_id(search_data.user_dao, 0)
 
