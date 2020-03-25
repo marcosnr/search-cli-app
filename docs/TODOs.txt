@@ -5,8 +5,12 @@ DONE including in tags
 load users and assign to vector in orgdao
 same with tickets, vector in usersdao
 return tickets and users for org
-find by ANY field in users, tickets
+find by ANY field in users, returning org as well
+including boolean  "suspended": True
+find by ANY field in tickets, returning org and users as well
 add readme does not support tags [] empty (I asked!)
+check export to json (no test)
+check if result too big default to json file
 NOT_SO_CORE:
 DONE show inheritance with EMPTY_RESULT_SET
 
@@ -24,7 +28,6 @@ interface to load other input from the given one
 
 export:
 append timesatamp to export json file
-check if result too big default to json file
 beeprint not good, prettyprint better
 
 ci:

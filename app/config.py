@@ -10,8 +10,8 @@ LOG_LEVEL = DEBUG
 LOG_FORMAT = '%(levelname)s:%(funcName)s:%(message)s'
 
 # Default configuration
-# DEFAULT_ORG_DATA = 'assets/organizations.json'
 DEFAULT_ORG_DATA = 'assets/mini_orgs.json'
+DEFAULT_USER_DATA = 'assets/mini_users.json'
 DEFAULT_RESULT_URI = 'search_results.json'
 DEFAULT_ORG_KEY_NAME = 'name'
 DEFAULT_OUT_FORMAT = 'yaml'
