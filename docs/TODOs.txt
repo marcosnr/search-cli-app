@@ -20,6 +20,7 @@ check export to json (no test)
 check if result too big default to json file
 
 NOT_SO_CORE:
+complete tests for validator and ctl
 DONE show inheritance with EMPTY_RESULT_SET
 Validate:
 repeated items by id
@@ -43,9 +44,10 @@ use mocks
 
 enhancements:
 search by time range
+code more DRY 
 
 README:
 
 complete setup
 complete usage and assumptions
-Why logging, security, ci is job 0, bandit, commits signed
+Why logging, security, ci is job 0, bandit, commit signed

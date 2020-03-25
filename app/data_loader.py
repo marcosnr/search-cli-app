@@ -20,5 +20,5 @@ class DataLoader:
       with open(uri, 'r') as f:
         json_dict = json.load(f)
     except FileNotFoundError:
-      raise Exception("given json input file is not accessible")
+      raise Exception(f"'{uri}' input file is not accessible")
     return json_dict

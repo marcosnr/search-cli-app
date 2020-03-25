@@ -9,13 +9,22 @@ class Validator:
   """ Simple Input Validation logic"""
 
   @staticmethod
-  def validate_data(org_dao):
-    """Business Model Validation"""
-    logging.info(f"loaded '{org_dao}' organizations")
+  def validate_org_data(org_dao):
+    """Organisation model validation"""
+    logging.info(f"loaded '{org_dao}' organisations correctly")
     if int(f"{org_dao}") > 0:
       return True
     else:
-      raise Exception("organization data wasn't loaded properly")
+      raise Exception("organisation data wasn't loaded properly")
+
+  @staticmethod
+  def validate_user_data(user_dao):
+    """User Model validation"""
+    logging.info(f"loaded '{user_dao}' users correctly")
+    if int(f"{user_dao}") > 0:
+      return True
+    else:
+      raise Exception("user data wasn't loaded properly")
 
   @staticmethod
   def validate_input(key_name, value):

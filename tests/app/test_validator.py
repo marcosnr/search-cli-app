@@ -34,4 +34,4 @@ def search_data():
   return search_data
 
 def test_validate_data(search_data):
-  assert Validator.validate_data(search_data.org_dao) is True
+  assert Validator.validate_org_data(search_data.org_dao) is True

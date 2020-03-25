@@ -86,4 +86,4 @@ def test_search_user_by_list_field(search_data):
 def test_search_user_by_bool_field(search_data):
   user_result_set = SearchAPI.search_user_by_field(search_data.user_dao, 'suspended', 'False')
   assert isinstance(user_result_set, ResultSet)
-  assert user_result_set.item['email'] == 'jonibarlow@flotonic.com'
+  assert user_result_set.item['signature'] == "Don't Worry Be Happy!"

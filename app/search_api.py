@@ -38,7 +38,7 @@ class SearchAPI:
     logging.debug(f"'{field}' -> '{search_value}'?")
     if field == "_id":
       return SearchAPI.search_org_by_id(org_dao, search_value)
-    result=None
+    result = None
     for org in org_dao.organizations:
       value = org.get(field)
       if value == 'None':
@@ -49,12 +49,12 @@ class SearchAPI:
         logging.debug(f"{field} is of list type")
         for iter in value:
           if iter == search_value:
-            result=org
+            result = org
       elif value == search_value:
-          result=org
+        result = org
       elif isinstance(value, bool):
-            result=org
-      if result!= None:
+        result = org
+      if result is not None:
         return ResultSet(org, field, search_value)
 
     logging.info(f"could not MATCH: '{search_value}' with any field: '{field}'")
@@ -76,7 +76,6 @@ class SearchAPI:
         return ResultSet(user, '_id', user_id)
     raise Exception(f"user_id: {user_id} not found in Datastore")
 
-
   @staticmethod
   def search_user_by_field(user_dao, field, search_value):
     """Search an users by any field
@@ -89,7 +88,7 @@ class SearchAPI:
     logging.debug(f"'{field}' -> '{search_value}'?")
     if field == "_id":
       return SearchAPI.search_user_by_id(user_dao, search_value)
-    result=None
+    result = None
     for user in user_dao.users:
       value = user.get(field)
       if value == 'None':
@@ -100,10 +99,10 @@ class SearchAPI:
         logging.debug(f"{field} is of list type")
         for iter in value:
           if iter == search_value:
-            result=user
+            result = user
       elif value == search_value:
-          result=user
+        result = user
       elif isinstance(value, bool):
-            result=user
-      if result!= None:
+        result = user
+      if result is not None:
         return ResultSet(user, field, search_value)
