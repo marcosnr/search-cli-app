@@ -6,6 +6,8 @@ same with tickets, vector in usersdao
 return tickets and users for org
 find by ANY field in users, tickets
 
+NOT_SO_CORE:
+show inheritance with EMPTY_RESULT_SET
 
 Validate:
 repeated items by id
@@ -15,6 +17,9 @@ items with no iditems with no fk!
 
 Custom and right types of exceptions
 makefile validate prereqs
+
+import:
+interface to load other input from the given one
 
 export:
 append timesatamp to export json file

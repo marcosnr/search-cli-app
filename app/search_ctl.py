@@ -35,16 +35,21 @@ class SearchApp:
     else:
       raise Exception("organization data wasn't loaded properly")
 
-  def search_organisations(self, attribute_name, value):
+  def validate_input(key_name, value):
+    if key_name == '':
+      key_name = config.DEFAULT_ORG_KEY_NAME
+
+  def search_organisations(self, key_name, value):
     """Search organizations by all fields
 
     Keyword arguments:
-    attribute_name -- name of field
+    key_name -- name of field
     value -- value of field to search
     """
 
-    logging.info(f"searching by: field='{attribute_name}',value='{value}'")
-    if attribute_name == "_id":
+    logging.info(f"searching by: field='{key_name}',value='{value}'")
+    # validate_input(key_name, value)
+    if key_name == "_id":
       org_result = SearchAPI.search_org_by_id(self.org_dao, value)
     else:
       raise Exception("field/option for search not available")
