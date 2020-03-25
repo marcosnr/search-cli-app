@@ -10,6 +10,7 @@ logger.setLevel(config.LOG_LEVEL)
 class SearchAPI:
   """Search (proto)API for Organizations and Ticketing"""
 
+  # Organisations
   @staticmethod
   def search_org_by_id(org_dao, org_id):
     """Search an organization by its unique Id
@@ -53,3 +54,19 @@ class SearchAPI:
 
     logging.info(f"could not MATCH: '{search_value}' with any field: '{field}'")
     return DefaultResultSet(field, search_value)
+
+  # Users
+  @staticmethod
+  def search_user_by_id(user_dao, user_id):
+    """Search an users by its unique Id
+
+    Keyword arguments:
+    user_dao -- DAO to access users data (UserDAO)
+    user_id -- unique id (Integer)
+    """
+    logging.debug(f"search_user_by_id: {user_id}")
+    for user in user_dao.users:
+      if user['_id'] == int(user_id):
+        logging.debug(f"Found {user['name']}")
+        return ResultSet(user, '_id', user_id)
+    raise Exception(f"user_id: {user_id} not found in Datastore")
