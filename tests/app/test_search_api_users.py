@@ -72,3 +72,18 @@ def test_search_user_by_id(search_data):
   assert user_result_set.item['name'] == 'Cross Barlow'
   with pytest.raises(Exception):
     user_result = SearchAPI.search_user_by_id(search_data.user_dao, 0)
+
+def test_search_user_by_field(search_data):
+  user_result_set = SearchAPI.search_user_by_field(search_data.user_dao, 'created_at', '2016-06-23T10:31:39 -10:00')
+  assert isinstance(user_result_set, ResultSet)
+  assert user_result_set.item['_id'] == 2
+
+def test_search_user_by_list_field(search_data):
+  user_result_set = SearchAPI.search_user_by_field(search_data.user_dao, 'tags', 'Henrietta')
+  assert isinstance(user_result_set, ResultSet)
+  assert user_result_set.item['email'] == 'jonibarlow@flotonic.com'
+
+def test_search_user_by_bool_field(search_data):
+  user_result_set = SearchAPI.search_user_by_field(search_data.user_dao, 'suspended', 'False')
+  assert isinstance(user_result_set, ResultSet)
+  assert user_result_set.item['email'] == 'jonibarlow@flotonic.com'

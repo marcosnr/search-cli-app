@@ -2,25 +2,30 @@ CORE:
 DONE find by ANY field in ANY org
 DONE including if field is empty
 DONE including in tags
-load users and assign to vector in orgdao
-same with tickets, vector in usersdao
-return tickets and users for org
-find by ANY field in users, returning org as well
-including boolean  "suspended": True
+DONE Load users and find by ID
+DONE find by ANY field in users
+DONE including boolean  "suspended": 'True'
+users assign to vector in orgdao and return users when search for org
+return org when searching for user
+
+Load tickets and find by ID
+find by ANY field in tickets
+return users when searching for ticket
+return org when searching for ticket
+tickets assign to vector in orgdao and return tickets when search for org
 find by ANY field in tickets, returning org and users as well
+
 add readme does not support tags [] empty (I asked!)
 check export to json (no test)
 check if result too big default to json file
+
 NOT_SO_CORE:
 DONE show inheritance with EMPTY_RESULT_SET
-
 Validate:
 repeated items by id
 id string is number is UUID xcheck
 items with no iditems with no fk!
-
-
-Custom and right types of exceptions
+Custom  exceptions for not found and handling
 makefile validate prereqs
 
 import:
@@ -36,8 +41,11 @@ create bin exec
 testing:
 use mocks
 
+enhancements:
+search by time range
+
 README:
 
 complete setup
 complete usage and assumptions
-Why logging, security, ci is job 0
+Why logging, security, ci is job 0, bandit, commits signed

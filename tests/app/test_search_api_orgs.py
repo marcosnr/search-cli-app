@@ -57,7 +57,7 @@ def test_search_org_by_empty_value(search_data):
   assert isinstance(org_result_set, ResultSet)
   assert org_result_set.item['name'] == 'Enthaze'
 
-def test_search_org_by_tags(search_data):
+def test_search_org_by_list_field(search_data):
   org_result_set = SearchAPI.search_org_by_field(search_data.org_dao, "domain_names", "zentix.com")
   assert isinstance(org_result_set, ResultSet)
   assert org_result_set.item['name'] == 'Enthaze'
