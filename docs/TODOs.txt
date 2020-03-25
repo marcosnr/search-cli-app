@@ -1,0 +1,34 @@
+CORE:
+find by ANY field in ANY org
+including if field is empty
+load users and assign to vector in orgdao
+same with tickets, vector in usersdao
+return tickets and users for org
+find by ANY field in users, tickets
+
+
+Validate:
+repeated items by id
+id string is number is UUID xcheck
+items with no iditems with no fk!
+
+
+Custom and right types of exceptions
+makefile validate prereqs
+
+export:
+append timesatamp to export json file
+check if result too big default to json file
+beeprint not good, prettyprint better
+
+ci:
+create github action pipeline
+create bin exec
+testing:
+use mocks
+
+README:
+
+complete setup
+complete usage and assumptions
+Why logging, security, ci is job 0

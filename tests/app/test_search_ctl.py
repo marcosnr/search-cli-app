@@ -1,6 +1,6 @@
 import pytest
 
-from search import SearchApp
+from search_ctl import SearchApp
 from models import OrganizationDAO
 
 

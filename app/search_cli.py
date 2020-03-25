@@ -2,7 +2,7 @@ import click
 import logging
 import config
 
-from search import SearchApp
+from search_ctl import SearchApp
 
 logger = logging.getLogger()
 logger.setLevel(config.LOG_LEVEL)
