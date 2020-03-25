@@ -22,7 +22,7 @@ class SearchAPI:
     for org in org_dao.organizations:
       if org['_id'] == int(org_id):
         logging.debug(f"Found {org['name']}")
-        return org
+        return ResultSet(org, '_id', org_id)
     raise Exception(f"org_id: {org_id} not found in Datastore")
 
   @staticmethod
@@ -34,7 +34,9 @@ class SearchAPI:
     field -- key field to search (String)
     search_value -- search value (String)
     """
-    logging.debug(f"search_org_by_field: {field}->? {search_value}")
+    logging.debug(f"{field}->? {search_value}")
+    if field == "_id":
+      return SearchAPI.search_org_by_id(org_dao, search_value)
     for org in org_dao.organizations:
       value = org.get(field)
       if value == 'None':

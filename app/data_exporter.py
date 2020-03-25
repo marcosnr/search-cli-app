@@ -18,7 +18,7 @@ class DataExporter:
     search_result -- result (Dictionary)
     """
 
-    logging.debug(f"yaml_print items: {type(search_result)}")
+    logging.debug(f"items: {type(search_result)}")
     print(yaml.dump(search_result))
 
   @staticmethod
@@ -29,7 +29,7 @@ class DataExporter:
     search_result -- result (Dictionary)
     """
 
-    logging.debug(f"pretty_print: {len(search_result)}")
+    logging.debug(f"items: {len(search_result)}")
     print(json.dumps(search_result, indent=2, default=str))
 
   @staticmethod
@@ -41,7 +41,7 @@ class DataExporter:
     search_result -- result (Dictionary)
     """
 
-    logging.debug(f"writing json items: {type(search_result)}")
+    logging.debug(f"items: {type(search_result)}")
     jsonpretty = json.dumps(search_result, indent=2, default=str)
     with open(config.DEFAULT_RESULT_URI, 'w') as outfile:
       json.dump(jsonpretty, outfile)

@@ -13,11 +13,11 @@ def test_search_init(app):
 
 def test_search_load(app):
   app.load_data()
-  assert app.validate_data() is True
+  assert isinstance(app.org_dao, OrganizationDAO)
 
 def test_search_org_by_id(app):
   app.load_data()
   org_result = app.search_organisations("_id", 102)
-  assert org_result['name'] == 'Nutralab'
+  assert org_result.item['name'] == 'Nutralab'
   with pytest.raises(Exception):
     app.search_organisations("_id", 99)

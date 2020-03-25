@@ -4,6 +4,7 @@ import config
 
 from search_ctl import SearchApp
 
+logging.basicConfig(format=config.LOG_FORMAT)
 logger = logging.getLogger()
 logger.setLevel(config.LOG_LEVEL)
 
@@ -29,6 +30,7 @@ def organisations(field, value, export_format):
   app = SearchApp()
   app.load_data()
   results = app.search_organisations(field, value)
+  logging.debug(f"results={results}")
   app.export(results, export_format)
 
 
@@ -37,4 +39,4 @@ if __name__ == '__main__':
     search_cli.add_command(organisations)
     search_cli()
   except Exception as e:
-    logging.error("search error: {0}".format(e))
+    logging.error("command error: {0}".format(e))

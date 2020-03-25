@@ -7,7 +7,6 @@ from result_set import ResultSet, DefaultResultSet
 
 @pytest.fixture
 def search_data():
-  # TODO expand later to Mocks / other daos
   test_org_data =	 [
     {
       "_id": 101,
@@ -37,15 +36,16 @@ def search_data():
   return search_data
 
 def test_search_org_by_id(search_data):
-  org_result = SearchAPI.search_org_by_id(search_data.org_dao, 101)
-  assert type(org_result) is dict
+  org_result_set = SearchAPI.search_org_by_id(search_data.org_dao, 101)
+  assert isinstance(org_result_set, ResultSet)
+  assert org_result_set.item['name'] == 'Enthaze'
   with pytest.raises(Exception):
     org_result = SearchAPI.search_org_by_id(search_data.org_dao, 102)
 
 def test_search_org_by_field(search_data):
   org_result_set = SearchAPI.search_org_by_field(search_data.org_dao, "name","Enthaze")
-  assert type(org_result_set) is ResultSet
-  print(org_result_set)
+  # assert type(org_result_set) is ResultSet
+  assert isinstance(org_result_set, ResultSet)
   assert org_result_set.item['_id'] == 101
 
 def test_search_org_by_field_empty(search_data):
