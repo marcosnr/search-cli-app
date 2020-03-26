@@ -31,6 +31,6 @@ class ResultSet(DefaultResultSet):
   def __str__(self):
     """simple customised string representation of this object"""
     output = (f"Requested field: {self.query_field}"
-              f"| Requested value: {self.query_value}"
-              f"| result(s): {len(self.item)}")
+              f" | Requested value: {self.query_value}"
+              f" | result(s): {len(self.item)}")
     return output

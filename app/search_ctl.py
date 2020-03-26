@@ -125,7 +125,7 @@ class SearchApp:
       print(f"Oops! {results} found, want to try again?")
 
   def export_user(self, results, export_format):
-    """Exports Organization
+    """Exports User result
 
     Keyword arguments:
     user -- user to export
@@ -139,6 +139,27 @@ class SearchApp:
       print(f"-------> User belongs to ORG[{org['name']}]::")
       copy_org = copy.deepcopy(org)
       del copy_org['users']
+      del copy_org['tickets']
+      DataExporter.export_item(copy_org, export_format)
+    else:
+      print(f"Oops! {results} found, want to try again?")
+
+  def export_ticket(self, results, export_format):
+    """Exports Ticket object
+
+    Keyword arguments:
+    ticket -- ticket to export
+    export_format -- export type format
+    """
+    if isinstance(results, ResultSet):
+      ticket = results.item
+      logging.debug(f"found: {ticket['subject']}")
+      DataExporter.export_item(ticket, export_format)
+      org = SearchAPI.search_org_by_id(self.org_dao, ticket.get("organization_id"))
+      print(f"-------> Ticket belongs to ORG: [{org['name']}]::")
+      copy_org = copy.deepcopy(org)
+      del copy_org['users']
+      del copy_org['tickets']
       DataExporter.export_item(copy_org, export_format)
     else:
       print(f"Oops! {results} found, want to try again?")

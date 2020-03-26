@@ -16,8 +16,8 @@ tickets assign to vector in orgdao and return tickets when search for org
 find by ANY field in tickets, returning org and users as well
 
 check FKs are present at load time
+check export to json (no test) and modify prompt
 add readme does not support tags [] empty (I asked!)
-check export to json (no test)
 check if result too big default to json file
 
 NOT_SO_CORE:
@@ -55,4 +55,5 @@ README:
 complete setup
 complete usage and assumptions: returns only first hit
 Why logging, security, ci is job 0, bandit, commit signed
+ctl getting big, could be modularise further
 for UX purposes, some prints are in ctl layer, they should not be there, but would required a bit of refactoring
