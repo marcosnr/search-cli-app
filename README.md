@@ -1,4 +1,4 @@
-# CLI Search app
+# Zen CLI Search App
 
 "Mies Van der Rohe's style" Search CLI App. 
 Simple and modular text search match on relational json input data
@@ -103,6 +103,9 @@ Linting is done with flake8
 ```bash
 make test
 ```
+## Asumptions
+
+See: [/docs/Assumptions.md](/docs/Assumptions.md)
 
 ## Design principles and Roadmap
 
