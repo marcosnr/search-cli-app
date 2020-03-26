@@ -14,7 +14,7 @@ class Validator:
     logging.debug(f"validating '{org_dao}' organisations...")
     for org in org_dao.organizations:
       value = org.get('_id')
-      if value == 'None':
+      if value is None:
         logging.warning(f"'{org.get('name')}' doesn't have '_id' NOT loading!")
         org_dao.remove(org)
         continue
@@ -35,7 +35,7 @@ class Validator:
     logging.debug(f"validating '{user_dao}' users")
     for user in user_dao.users:
       value = user.get('_id')
-      if value == 'None':
+      if value is None:
         logging.warning(f"'{user.get('name')}' doesn't have '_id' NOT loading!")
         user_dao.remove(user)
         continue
@@ -55,7 +55,7 @@ class Validator:
     logging.debug(f"validating '{ticket_dao}' tickets")
     for ticket in ticket_dao.tickets:
       value = ticket.get('_id')
-      if value == 'None':
+      if value is None:
         logging.warning(f"'{ticket.get('subject')}' doesn't have '_id' NOT loading!")
         ticket_dao.remove(ticket)
         continue

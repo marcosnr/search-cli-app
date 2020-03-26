@@ -25,7 +25,7 @@ cechk max items and 2 file!
 ...with given data
 check user id 16 (no org)
 check ticket e68d8bfd-9826-42fd-9692-add445aa7430 (no org id, no submitter)
-
+check when printing org should not print tickets twice, on org and on users
 check org.get('name') and other assumptions with get better
 check with real data? python app/search_cli.py users --field '_id' --value 1
 check no clash org with org same name in linking!
@@ -38,6 +38,7 @@ update README:
 
 
 Readme more:
+when printing associated info, for instance org, willprint the user / ticket again
 Why logging, security, ci is job 0, bandit, commit signed
 ctl getting big, could be modularise further
 for UX purposes, some prints are in ctl layer, they should not be there, but would required a bit of refactoring

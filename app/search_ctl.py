@@ -1,5 +1,6 @@
 import logging
 import config
+import copy
 from validator import Validator
 from search_api import SearchAPI
 from result_set import ResultSet
@@ -49,7 +50,7 @@ class SearchApp:
       for org in self.org_dao.organizations:
         try:
           organization_id = user.get("organization_id")
-          if organization_id == 'None':
+          if organization_id is None:
             logging.warning(f"{user.get('_id')} doesn't have an organization_id")
             if config.FULL_RELATIONAL:
               self.user_dao.users.remove(user)
@@ -82,7 +83,7 @@ class SearchApp:
       for user in self.user_dao.users:
         try:
           submitter_id = ticket.get("submitter_id")
-          if submitter_id == 'None':
+          if submitter_id is None:
             logging.debug(f"tck_id: {ticket.get('_id')} doesn't have a submitter")
           else:
             submitter = SearchAPI.search_user_by_id(self.user_dao, submitter_id)
@@ -97,7 +98,7 @@ class SearchApp:
       for user in self.user_dao.users:
         try:
           assignee_id = ticket.get("assignee_id")
-          if assignee_id == 'None':
+          if assignee_id is None:
             logging.debug(f"tck_id: {ticket.get('_id')} doesn't have an assignee")
           else:
             assignee = SearchAPI.search_user_by_id(self.user_dao, assignee_id)
@@ -158,12 +159,14 @@ class SearchApp:
     DataExporter.show_header('ORGANIZATION')
     if isinstance(results, ResultSet):
       org = results.item
-      logging.debug(f"found: {org.get('name')}")
-      if len(org['users']) > config.MAX_ITEMS_SCREEN | len(org['tickets']) > config.MAX_ITEMS_SCREEN:
-        DataExporter.to_many_to_show()
-        DataExporter.export_item(org, 'file')
-      else:
-        DataExporter.export_item(org, export_format)
+      logging.debug(f"printing org: {org.get('name')}")
+      # avoiding printing tickets twice, linked to orgs and to users
+      copy_org = copy.deepcopy(org)
+      copy_users = copy_org.get('users')
+      for user in copy_users:
+        del user['tickets_assigned']
+        del user['tickets_submitted']
+      DataExporter.export_item(copy_org, export_format)
     else:
       DataExporter.show_not_found(results)
 
@@ -180,7 +183,7 @@ class SearchApp:
       logging.debug(f"found: {user.get('name')}")
       DataExporter.export_item(user, export_format)
       organization_id = user.get("organization_id")
-      if organization_id == 'None':
+      if organization_id is None:
         logging.warning(f"{user.get('_id')} doesn't have an organization_id")
       else:
         org = SearchAPI.search_org_by_id(self.org_dao, user.get("organization_id"))
@@ -200,24 +203,27 @@ class SearchApp:
       ticket = results.item
       logging.debug(f"printing ticket: {ticket.get('_id')}")
       DataExporter.export_item(ticket, export_format)
+      logging.debug(f"printing submitter..")
       submitter_id = ticket.get("submitter_id")
-      if submitter_id == 'None':
+      if submitter_id is None:
         logging.info(f"tck_id: {ticket.get('_id')} doesn't have a submitter")
       else:
         submitter = SearchAPI.search_user_by_id(self.user_dao, submitter_id)
         DataExporter.show_user_relation(submitter, 'submitter', export_format)
+      logging.debug(f"printing assignee...")
       assignee_id = ticket.get("assignee_id")
-      if assignee_id == 'None':
+      logging.debug(f"assignee_id {assignee_id}..")
+      if assignee_id is None:
         logging.debug(f"tck_id: {ticket.get('_id')} doesn't have an assignee")
       else:
         assignee = SearchAPI.search_user_by_id(self.user_dao, assignee_id)
         DataExporter.show_user_relation(assignee, 'assignee', export_format)
       # print org
       organization_id = ticket.get("organization_id")
-      if organization_id == 'None':
+      if organization_id is None:
         logging.warning(f"{ticket.get('_id')} doesn't have an organization_id")
       else:
-        org = SearchAPI.search_org_by_id(self.org_dao, ticket.get("organization_id"))
+        org = SearchAPI.search_org_by_id(self.org_dao, organization_id)
         DataExporter.show_org_relation(org, export_format)
     else:
       DataExporter.show_not_found(results)

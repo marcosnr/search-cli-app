@@ -82,6 +82,7 @@ class DataExporter:
 
   @staticmethod
   def show_user_relation(user, type, export_format):
+    logging.debug(f"show_user_relation: {type}")
     if type == 'submitter':
         print(f"<<<<< Ticket was submitted by: [{user.get('name')}]::")
     else:
@@ -101,7 +102,7 @@ class DataExporter:
     print(f"\n\n________SEARCH {type} RESULTS__________")
 
   @staticmethod
-  def to_many_to_show():
+  def too_many_to_show():
     print(f"\n\n !!RSI warning!!"
           f"Search results are too big to show on the screen"
           f"defaults to save results in a file")

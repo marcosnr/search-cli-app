@@ -42,7 +42,7 @@ class SearchAPI:
     result = None
     for org in org_dao.organizations:
       value = org.get(field)
-      if value == 'None':
+      if value is None:
         # Assuming schema is flexible, so checking each org...
         continue
       elif isinstance(value, list):
@@ -93,7 +93,7 @@ class SearchAPI:
     result = None
     for user in user_dao.users:
       value = user.get(field)
-      if value == 'None':
+      if value is None:
         # Assuming schema is flexible, so checking each user...
         continue
       elif isinstance(value, list):
@@ -141,7 +141,7 @@ class SearchAPI:
     result = None
     for ticket in ticket_dao.tickets:
       value = ticket.get(field)
-      if value == 'None':
+      if value is None:
         # Assuming schema is flexible, so checking each ticket...
         continue
       elif isinstance(value, list):
