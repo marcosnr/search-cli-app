@@ -8,10 +8,10 @@ DONE including boolean  "suspended": 'True'
 DONE users assign to vector in orgdao and return users when search for org
 DONE return org when searching for user
 
-Load tickets and find by ID
-find by ANY field in tickets
+DONE Load tickets and find by ID
+DONE find by ANY field in tickets
+DONE return org when searching for ticket
 return users when searching for ticket
-return org when searching for ticket
 tickets assign to vector in orgdao and return tickets when search for org
 find by ANY field in tickets, returning org and users as well
 

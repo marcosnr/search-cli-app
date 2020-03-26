@@ -1,6 +1,5 @@
 import logging
 import config
-import copy
 from validator import Validator
 from search_api import SearchAPI
 from result_set import ResultSet
@@ -122,7 +121,7 @@ class SearchApp:
       logging.debug(f"found: {org['name']}")
       DataExporter.export_item(org, export_format)
     else:
-      print(f"Oops! {results} found, want to try again?")
+      DataExporter.show_not_found(results)
 
   def export_user(self, results, export_format):
     """Exports User result
@@ -136,13 +135,9 @@ class SearchApp:
       logging.debug(f"found: {user['name']}")
       DataExporter.export_item(user, export_format)
       org = SearchAPI.search_org_by_id(self.org_dao, user.get("organization_id"))
-      print(f"-------> User belongs to ORG[{org['name']}]::")
-      copy_org = copy.deepcopy(org)
-      del copy_org['users']
-      del copy_org['tickets']
-      DataExporter.export_item(copy_org, export_format)
+      DataExporter.show_org_relation(org, export_format)
     else:
-      print(f"Oops! {results} found, want to try again?")
+      DataExporter.show_not_found(results)
 
   def export_ticket(self, results, export_format):
     """Exports Ticket object
@@ -156,10 +151,6 @@ class SearchApp:
       logging.debug(f"found: {ticket['subject']}")
       DataExporter.export_item(ticket, export_format)
       org = SearchAPI.search_org_by_id(self.org_dao, ticket.get("organization_id"))
-      print(f"-------> Ticket belongs to ORG: [{org['name']}]::")
-      copy_org = copy.deepcopy(org)
-      del copy_org['users']
-      del copy_org['tickets']
-      DataExporter.export_item(copy_org, export_format)
+      DataExporter.show_org_relation(org, export_format)
     else:
-      print(f"Oops! {results} found, want to try again?")
+      DataExporter.show_not_found(results)

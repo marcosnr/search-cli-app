@@ -1,4 +1,5 @@
 import json
+import copy
 import logging
 import config
 import yaml
@@ -63,3 +64,16 @@ class DataExporter:
       DataExporter.json_out(item)
     else:
       raise Exception("Export format not supported")
+
+  @staticmethod
+  def show_org_relation(org, export_format):
+      print(f"-------> Ticket belongs to ORG: [{org['name']}]::")
+      copy_org = copy.deepcopy(org)
+      del copy_org['users']
+      del copy_org['tickets']
+      DataExporter.export_item(copy_org, export_format)
+
+  @staticmethod
+  def show_not_found(results):
+    print(f"Oops! 'quote the Raven...'404'...")
+    print(f"{results} found, do you want to try again?")
