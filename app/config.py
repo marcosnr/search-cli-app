@@ -6,8 +6,9 @@ INFO = 20
 WARNING = 30
 ERROR = 40
 # Default log Level
-# LOG_LEVEL = DEBUG
-LOG_LEVEL = WARNING
+LOG_LEVEL = DEBUG
+# LOG_LEVEL = INFO
+# LOG_LEVEL = WARNING
 LOG_FORMAT = '%(levelname)s:%(funcName)s:%(message)s'
 
 # Default configuration

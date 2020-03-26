@@ -88,8 +88,12 @@ class DataExporter:
     else:
         print(f">>>>> Ticket is assigned to: [{user.get('name')}]::")
     copy_user = copy.deepcopy(user)
-    del copy_user['tickets_assigned']
-    del copy_user['tickets_submitted']
+    tickets_assigned = copy_user.get("tickets_assigned")
+    if tickets_assigned is not None:
+      del copy_user['tickets_assigned']
+    tickets_submitted = copy_user.get("tickets_submitted")
+    if tickets_submitted is not None:
+      del copy_user['tickets_submitted']
     DataExporter.export_item(copy_user, export_format)
 
   @staticmethod
