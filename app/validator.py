@@ -17,7 +17,7 @@ class Validator:
       if value == 'None':
         org_dao.remove(org)
       logging.debug(f"'{org['name']}' ok, init users list...")
-    # creating future relationship holders
+      # creating future relationship holders
       org.update({'users': []})
       org.update({'tickets': []})
     # are there any remaining valid orgs?
@@ -35,6 +35,9 @@ class Validator:
       value = user.get('_id')
       if value == 'None':
         user_dao.remove(user)
+      # creating future relationship holders
+      user.update({'tickets_assigned': []})
+      user.update({'tickets_submitted': []})
     # are there any remaining valid users?
     if int(f"{user_dao}") > 0:
       logging.info(f"loaded '{user_dao}' users correctly")

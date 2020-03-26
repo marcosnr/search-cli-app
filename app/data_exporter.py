@@ -67,7 +67,7 @@ class DataExporter:
 
   @staticmethod
   def show_org_relation(org, export_format):
-      print(f"-------> Ticket belongs to ORG: [{org['name']}]::")
+      print(f"******* Ticket belongs to ORG: [{org['name']}]::")
       copy_org = copy.deepcopy(org)
       del copy_org['users']
       del copy_org['tickets']
@@ -76,11 +76,19 @@ class DataExporter:
   @staticmethod
   def show_user_relation(user, type, export_format):
     if type == 'submitter':
-        print(f"+++++ Ticket was submitted by: [{user['name']}]::")
+        print(f"<<<<< Ticket was submitted by: [{user['name']}]::")
     else:
         print(f">>>>> Ticket is assigned to: [{user['name']}]::")
+    copy_user = copy.deepcopy(user)
+    del copy_user['tickets_assigned']
+    del copy_user['tickets_submitted']
+    DataExporter.export_item(copy_user, export_format)
 
   @staticmethod
   def show_not_found(results):
     print(f"Oops! 'quote the Raven...'404'...")
     print(f"{results} found, do you want to try again?")
+
+  @staticmethod
+  def show_header(type):
+    print(f"\n\n________SEARCH {type} RESULTS__________")

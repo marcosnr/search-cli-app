@@ -57,9 +57,10 @@ class SearchApp:
           self.user_dao.users.remove(user)
 
   def link_tickets(self):
-    """Link tickets to their respective organizations"""
+    """Link tickets to their respective organizations and users"""
     logging.debug("linking tickets with organizations...")
     for ticket in self.ticket_dao.tickets:
+      # link to orgs
       for org in self.org_dao.organizations:
         try:
           org = SearchAPI.search_org_by_id(self.org_dao, ticket.get("organization_id"))
@@ -68,6 +69,24 @@ class SearchApp:
         except Exception as e:
           logging.error(f"{e}, can't link ticket id {ticket['_id']}")
           logging.error(f"{ticket['_id']} has invalid organization_id: {ticket['organization_id']}")
+          self.ticket_dao.tickets.remove(ticket)
+      # link to submitters
+      for user in self.user_dao.users:
+        try:
+          submitter = SearchAPI.search_user_by_id(self.user_dao, ticket.get("submitter_id"))
+          logging.debug(f"linking submitter tck_id: {ticket['_id']} -> user_id {user['_id']}")
+          submitter['tickets_submitted'].append(ticket)
+        except Exception as e:
+          logging.error(f"{e}, can't link submitter to ticket!")
+          logging.error(f"{ticket['submitter_id']} can't be found among registered users")
+          self.ticket_dao.tickets.remove(ticket)
+        try:
+          assignee = SearchAPI.search_user_by_id(self.user_dao, ticket.get("assignee_id"))
+          logging.debug(f"linking assignee tck_id: {ticket['_id']} -> user_id {user['_id']}")
+          assignee['tickets_assigned'].append(ticket)
+        except Exception as e:
+          logging.error(f"{e}, can't link assignee to ticket!")
+          logging.error(f"{ticket['assignee_id']} can't be found among registered users")
           self.ticket_dao.tickets.remove(ticket)
 
 # search logic
@@ -116,6 +135,7 @@ class SearchApp:
     results -- resource to export
     export_format -- export type format
     """
+    DataExporter.show_header('ORGANIZATION')
     if isinstance(results, ResultSet):
       org = results.item
       logging.debug(f"found: {org['name']}")
@@ -130,6 +150,7 @@ class SearchApp:
     user -- user to export
     export_format -- export type format
     """
+    DataExporter.show_header('USER')
     if isinstance(results, ResultSet):
       user = results.item
       logging.debug(f"found: {user['name']}")
@@ -146,6 +167,7 @@ class SearchApp:
     ticket -- ticket to export
     export_format -- export type format
     """
+    DataExporter.show_header('TICKET')
     if isinstance(results, ResultSet):
       ticket = results.item
       logging.debug(f"found: {ticket['subject']}")

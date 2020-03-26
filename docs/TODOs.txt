@@ -12,9 +12,10 @@ DONE Load tickets and find by ID
 DONE tickets assign to vector in orgdao
 DONE find by ANY field in tickets
 DONE return org when searching for ticket
-DONE return users when searching for ticket
- return tickets when search for user
- return tickets when search for org
+DONE return users when searching for 
+DONE return tickets when search for org
+return tickets when search for user
+check no clash org with org same name in linking!
 
 check FKs are present at load time
 check export to json (no test) and modify prompt
@@ -50,7 +51,7 @@ enhancements:
 search by time range
 code more DRY
 cli tests capturing ouptut print
-
+ascii art, it's but one line in the exporter!
 README:
 
 complete setup
