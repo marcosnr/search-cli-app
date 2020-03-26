@@ -74,6 +74,13 @@ class DataExporter:
       DataExporter.export_item(copy_org, export_format)
 
   @staticmethod
+  def show_user_relation(user, type, export_format):
+    if type == 'submitter':
+        print(f"+++++ Ticket was submitted by: [{user['name']}]::")
+    else:
+        print(f">>>>> Ticket is assigned to: [{user['name']}]::")
+
+  @staticmethod
   def show_not_found(results):
     print(f"Oops! 'quote the Raven...'404'...")
     print(f"{results} found, do you want to try again?")

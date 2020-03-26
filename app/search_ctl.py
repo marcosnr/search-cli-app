@@ -150,6 +150,10 @@ class SearchApp:
       ticket = results.item
       logging.debug(f"found: {ticket['subject']}")
       DataExporter.export_item(ticket, export_format)
+      submitter = SearchAPI.search_user_by_id(self.user_dao, ticket.get("submitter_id"))
+      assignee = SearchAPI.search_user_by_id(self.user_dao, ticket.get("assignee_id"))
+      DataExporter.show_user_relation(submitter, 'submitter', export_format)
+      DataExporter.show_user_relation(assignee, 'assignee', export_format)
       org = SearchAPI.search_org_by_id(self.org_dao, ticket.get("organization_id"))
       DataExporter.show_org_relation(org, export_format)
     else:
