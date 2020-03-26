@@ -7,14 +7,20 @@ DONE find by ANY field in users
 DONE including boolean  "suspended": 'True'
 DONE users assign to vector in orgdao and return users when search for org
 DONE return org when searching for user
-
+DONE show inheritance with EMPTY_RESULT_SET
 DONE Load tickets and find by ID
 DONE tickets assign to vector in orgdao
 DONE find by ANY field in tickets
 DONE return org when searching for ticket
 DONE return users when searching for 
 DONE return tickets when search for org
-return tickets when search for user
+DONE return tickets when search for user
+but...python app/search_cli.py users --field '_id' --value 1
+has this weird print:
+ - *id002
+tickets_submitted:
+- *id002
+- *id002
 check no clash org with org same name in linking!
 
 check FKs are present at load time
@@ -22,13 +28,20 @@ check export to json (no test) and modify prompt
 add readme does not support tags [] empty (I asked!)
 check if result too big default to json file
 
+README:
+complete setup
+complete usage and assumptions: returns only first hit
+Why logging, security, ci is job 0, bandit, commit signed
+ctl getting big, could be modularise further
+for UX purposes, some prints are in ctl layer, they should not be there, but would required a bit of refactoring
+
 NOT_SO_CORE:
-search for a user field inside an org (recursive search)
-complete tests for validator and ctl
-DONE show inheritance with EMPTY_RESULT_SET
-ask if needs only name id or full result (for org would be big result)
-Validate:
 repeated items by id
+complete tests for validator and ctl
+
+ask if needs only name id or full result (for org would be big result)
+
+Validate:
 id string is number is UUID xcheck
 items with no iditems with no fk!
 Custom  exceptions for not found and handling
@@ -48,14 +61,9 @@ testing:
 use mocks
 
 enhancements:
+search for a user field inside an org (recursive search)
 search by time range
 code more DRY
 cli tests capturing ouptut print
 ascii art, it's but one line in the exporter!
-README:
 
-complete setup
-complete usage and assumptions: returns only first hit
-Why logging, security, ci is job 0, bandit, commit signed
-ctl getting big, could be modularise further
-for UX purposes, some prints are in ctl layer, they should not be there, but would required a bit of refactoring
