@@ -4,6 +4,7 @@ import copy
 import logging
 import config
 import yaml
+
 from datetime import datetime
 
 logger = logging.getLogger()
@@ -19,9 +20,10 @@ class DataExporter:
     Keyword arguments:
     search_result -- result (Dictionary)
     """
-
+    noalias_dumper = yaml.dumper.SafeDumper
+    noalias_dumper.ignore_aliases = lambda self, search_result: True
     logging.debug(f"items: {type(search_result)}")
-    print(yaml.dump(search_result))
+    print(yaml.dump(search_result, default_flow_style=False, Dumper=noalias_dumper))
 
   @staticmethod
   def pretty_print(search_result):

@@ -7,7 +7,7 @@ from data_exporter import DataExporter
 
 @pytest.fixture
 def search_results():
-  test_results = {
+  search_results = {
       "_id": 101,
       "url": "http://initech.zendesk.com/api/v2/organizations/101.json",
       "external_id": "9270ed79-35eb-4a38-a46f-35725197ea8d",
@@ -28,9 +28,9 @@ def test_yaml_print(capsys,search_results):
     assert  err ==''
     
 def test_yaml_print(capsys,search_results):
-    DataExporter.yaml_print(search_results)
+    DataExporter.pretty_print(search_results)
     out, err = capsys.readouterr()
-    assert  "exporter" in out 
+    # assert  "exporter" in out 
     assert  out !=''
     assert  err ==''
 

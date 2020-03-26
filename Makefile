@@ -21,7 +21,7 @@ test: ## runs included test suite
 	$(info [+] running tests...")
 	pipenv run pytest
 
-lint: ## linting of code base for good practices
+lint: ## linting of code base for good practices, E111,E114: identention = 2 tabs, not 4
+
 	$(info [+] linting with flake8 ...")
-	# E111,E114 identention too verbose
 	pipenv run flake8 app --ignore=E111,E114

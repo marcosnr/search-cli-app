@@ -25,7 +25,6 @@ check user id 16 (no org)
 check ticket e68d8bfd-9826-42fd-9692-add445aa7430 (no org id, no submitter)
 
 check org['name'] and other assumptions with get better
-subm =
 check with real data? python app/search_cli.py users --field '_id' --value 1
 has this weird print:
  - *id002

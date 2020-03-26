@@ -62,7 +62,7 @@ class SearchApp:
     """Link tickets to their respective organizations and users"""
     logging.debug("linking tickets with organizations...")
     for ticket in self.ticket_dao.tickets:
-      # link to orgs
+      # 1. link tickets to orgs
       for org in self.org_dao.organizations:
         try:
           logging.debug(f"linking {ticket.get('_id')} -> {org['name']}")
@@ -74,13 +74,12 @@ class SearchApp:
           if config.FULL_RELATIONAL:
             self.ticket_dao.tickets.remove(ticket)
           continue
-      # link existing users
+      # 2. link tickets to submitters
       for user in self.user_dao.users:
-        # link submitters
         try:
           submitter_id = ticket.get("submitter_id")
           if submitter_id == 'None':
-            logging.debug(f"tck_id: {ticket['_id']} doesn't have a submitter")          
+            logging.debug(f"tck_id: {ticket['_id']} doesn't have a submitter")
           else:
             submitter = SearchAPI.search_user_by_id(self.user_dao, submitter_id)
             logging.debug(f"linking submitter tck_id: {ticket['_id']} -> user_id {user['_id']}")
@@ -91,10 +90,12 @@ class SearchApp:
           if config.FULL_RELATIONAL:
             self.ticket_dao.tickets.remove(ticket)
           continue
-        try: # link assignees
+      # 3. link tickets to assignees
+      for user in self.user_dao.users:
+        try:
           assignee_id = ticket.get("assignee_id")
           if assignee_id == 'None':
-            logging.debug(f"tck_id: {ticket['_id']} doesn't have an assignee")          
+            logging.debug(f"tck_id: {ticket['_id']} doesn't have an assignee")
           else:
             assignee = SearchAPI.search_user_by_id(self.user_dao, assignee_id)
             logging.debug(f"linking assignee tck_id: {ticket['_id']} -> user_id {user['_id']}")

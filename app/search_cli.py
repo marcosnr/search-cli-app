@@ -21,7 +21,7 @@ def search_cli():
 @click.option('--value',
               required=True,
               help='value to search in the given field')
-@click.option('--export_format',
+@click.option('--export-format',
               default=config.DEFAULT_OUT_FORMAT,
               help='format to show results (yaml | json | file) [default:' + config.DEFAULT_OUT_FORMAT + ']')
 def organisations(field, value, export_format):
@@ -41,7 +41,7 @@ def organisations(field, value, export_format):
 @click.option('--value',
               required=True,
               help='value to search in the given field')
-@click.option('--export_format',
+@click.option('--export-format',
               default=config.DEFAULT_OUT_FORMAT,
               help='format to show results (yaml | json | file) [default:' + config.DEFAULT_OUT_FORMAT + ']')
 def users(field, value, export_format):
@@ -61,7 +61,7 @@ def users(field, value, export_format):
 @click.option('--value',
               required=True,
               help='value to search in the given field')
-@click.option('--export_format',
+@click.option('--export-format',
               default=config.DEFAULT_OUT_FORMAT,
               help='format to show results (yaml | json | file) [default:' + config.DEFAULT_OUT_FORMAT + ']')
 def tickets(field, value, export_format):
