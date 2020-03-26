@@ -20,7 +20,17 @@ DONE check export to json (no test) and modify prompt
 DONE check FKs are present at load time
 DONE check PK are present when loading!!!!
 DONE check name r rpesent org users
-check FK of tickets to Users
+DONE check FK of tickets to Users
+
+why orgs in real data have repeated users? :'(
+python app/search_cli.py organisations --value "Enthaze" > out
+
+ticket for users should not print org:
+python app/search_cli.py users --field role --value "admin"
+
+unicode in yaml:
+python app/search_cli.py tickets --field 'subject' --value "A Catastrophe in Korea (North)"
+
 cechk max items and 2 file!
 ...with given data
 check user id 16 (no org)
@@ -30,15 +40,7 @@ check org.get('name') and other assumptions with get better
 check with real data? python app/search_cli.py users --field '_id' --value 1
 check no clash org with org same name in linking!
 
-update README:
-  PK will not load, FK optional config
-  add readme does not support tags [] empty (I asked!)
-  complete setup
-  complete usage and assumptions: returns only first hit
-
-
 Readme more:
-when printing associated info, for instance org, willprint the user / ticket again
 Why logging, security, ci is job 0, bandit, commit signed
 ctl getting big, could be modularise further
 for UX purposes, some prints are in ctl layer, they should not be there, but would required a bit of refactoring
@@ -65,6 +67,8 @@ beeprint not good, prettyprint better
 ci:
 create github action pipeline
 create bin exec
+
+.flake8 ?
 testing:
 use mocks
 

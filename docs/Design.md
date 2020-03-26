@@ -2,6 +2,14 @@
 
 Explanation of design decisions and overall roadmap for this app
 
+## Architecture principles
+
+A. Extensibility - separation of concerns.
+B. Simplicity - aim for the simplest solution that gets the job done whilst remaining readable, extensible and testable.
+C. Test Coverage - breaking changes should break your tests.
+D. Performance - should gracefully handle a significant increase in amount of data provided (e.g 10000+ users).
+E. Robustness - should handle and report errors.
+
 ## MVC Architecture
 
 View: CLI input console
@@ -20,41 +28,12 @@ In the Sketch below you can see the overall module architecture:
 ![Alt Module diagram](arch-sketch.png?raw=true "Module diagram")
 
 
-## Architecture principles
-
-A. Extensibility - separation of concerns.
-B. Simplicity - aim for the simplest solution that gets the job done whilst remaining readable, extensible and testable.
-C. Test Coverage - breaking changes should break your tests.
-D. Performance - should gracefully handle a significant increase in amount of data provided (e.g 10000+ users).
-E. Robustness - should handle and report errors.
-
-## Extra guidelines
+## guidelines
 
 * TDD Approach. First tests must fail, only then create back end that meets criteria
 * Clear git commit history showing TDD 
 * Early integration
 * Early and clear documentation
-
-## Assumptions
-
-I asked for confirmation on the following, decided to go ahead assuming:
-
-1. "full value matching is fine" assertion =  only full value match is accepted.
-
-e.g. returning "mary" when searching only for "mary" 
-will *NOT* return "mary", "Mary", "MarCos", "marc", "Amar" 
-
-2. Non Id Fields must exist
-e.g. App will check for:
-"description" : ""
-"description" : null
-But will not check if "description" exist at all in a given input
-
-3. Assume I have access to the public Internet to download public libraries
-
-4. Overall, focusing on  the "Dev side of things". 
-Nonetheless, DevOps = Infrastructure-as-Code, and everything on the "Ops side of things"
-like pipelines, stages, connectivity, build, Security Scanning etc. can and should be coded / tested as well... just like a "functional code", and from day 0!
 
 ## Road Map
 
@@ -83,7 +62,7 @@ like pipelines, stages, connectivity, build, Security Scanning etc. can and shou
 
 * "Security job 0" principles as early as possible
 
-* POC for Extensibility with in memory:
+* POC for Extensibility with in memory library:
   - [Marshmellow](https://marshmallow.readthedocs.io/en/stable/nesting.html)
   - JsonDB/MongoDB integration
 

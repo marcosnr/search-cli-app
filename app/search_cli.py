@@ -4,9 +4,20 @@ import config
 
 from search_ctl import SearchApp
 
-logging.basicConfig(format=config.LOG_FORMAT)
 logger = logging.getLogger()
-logger.setLevel(config.LOG_LEVEL)
+# file
+fh = logging.FileHandler(config.LOG_FILE)
+fh.setLevel(config.FILE_LOG_LEVEL)
+# console
+ch = logging.StreamHandler()
+ch.setLevel(config.LOG_LEVEL)
+# create formatter and add it to the handlers
+formatter = logging.Formatter(config.LOG_FORMAT)
+fh.setFormatter(formatter)
+ch.setFormatter(formatter)
+# add the handlers to the logger
+logger.addHandler(fh)
+logger.addHandler(ch)
 
 
 @click.group()

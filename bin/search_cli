@@ -1,0 +1,3 @@
+#! /usr/bin/env bash
+export PYTHONPATH=${PYTHONPATH}:../app
+python3 app/search_cli.py $@

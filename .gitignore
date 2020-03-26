@@ -3,4 +3,5 @@ search_results.json
 app/__pycache__/*
 tests/app/__pycache__/*
 app/results@*
-out.txt
+out*
+*.log

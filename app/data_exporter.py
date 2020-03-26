@@ -98,7 +98,7 @@ class DataExporter:
 
   @staticmethod
   def show_not_found(results):
-    print(f"Oops! 'quote the Raven...'404'...")
+    print(f"Oops! 'quote the raven...404'...")
     print(f"{results} found, do you want to try again?")
 
   @staticmethod
