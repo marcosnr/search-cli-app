@@ -10,7 +10,7 @@ logger.setLevel(config.LOG_LEVEL)
 class SearchAPI:
   """Search (proto)API for Organizations and Ticketing"""
 
-  # Organisations
+# Organisations
   @staticmethod
   def search_org_by_id(org_dao, org_id):
     """Search an organization by its unique Id
@@ -61,7 +61,7 @@ class SearchAPI:
     logging.info(f"could not MATCH: '{search_value}' with any field: '{field}'")
     return DefaultResultSet(field, search_value)
 
-  # Users
+# Users
   @staticmethod
   def search_user_by_id(user_dao, user_id):
     """Search an users by its unique Id
@@ -108,3 +108,51 @@ class SearchAPI:
         result = user
       if result is not None:
         return ResultSet(user, field, search_value)
+
+# Tickets
+  @staticmethod
+  def search_ticket_by_id(ticket_dao, ticket_id):
+    """Search an tickets by its unique Id
+
+    Keyword arguments:
+    ticket_dao -- DAO to access tickets data (TicketDAO)
+    ticket_id -- unique id (Integer)
+    """
+    logging.debug(f"search_ticket_by_id: {ticket_id}")
+    for ticket in ticket_dao.tickets:
+      if ticket['_id'] == ticket_id:
+        logging.debug(f"Found '{ticket['subject']}'")
+        return ticket
+    raise Exception(f"ticket_id: {ticket_id} not found in Datastore")
+
+  @staticmethod
+  def search_ticket_by_field(ticket_dao, field, search_value):
+    """Search a tickets by any field
+
+    Keyword arguments:
+    ticket_dao -- DAO to access tickets data (TicketDAO)
+    field -- key field to search (String)
+    search_value -- search value (String)
+    """
+    logging.debug(f"'{field}' -> '{search_value}'?")
+    if field == "_id":
+      ticket = SearchAPI.search_ticket_by_id(ticket_dao, search_value)
+      return ResultSet(ticket, '_id', search_value)
+    result = None
+    for ticket in ticket_dao.tickets:
+      value = ticket.get(field)
+      if value == 'None':
+        # Assuming schema is flexible, so checking each ticket...
+        continue
+      elif isinstance(value, list):
+        # search inside list, e.g. 'tags'
+        logging.debug(f"{field} is of list type")
+        for iter in value:
+          if iter == search_value:
+            result = ticket
+      elif value == search_value:
+        result = ticket
+      elif isinstance(value, bool):
+        result = ticket
+      if result is not None:
+        return ResultSet(ticket, field, search_value)

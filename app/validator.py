@@ -17,7 +17,9 @@ class Validator:
       if value == 'None':
         org_dao.remove(org)
       logging.debug(f"'{org['name']}' ok, init users list...")
+    # creating future relationship holders
       org.update({'users': []})
+      org.update({'tickets': []})
     # are there any remaining valid orgs?
     if int(f"{org_dao}") > 0:
       logging.info(f"loaded '{org_dao}' organisations correctly")
@@ -39,6 +41,21 @@ class Validator:
       return True
     else:
       raise Exception("users data wasn't loaded properly")
+
+  @staticmethod
+  def validate_ticket_data(ticket_dao):
+    """Ticket Model validation"""
+    logging.debug(f"validating '{ticket_dao}' tickets")
+    for ticket in ticket_dao.tickets:
+      value = ticket.get('_id')
+      if value == 'None':
+        ticket_dao.remove(ticket)
+    # are there any remaining valid tickets?
+    if int(f"{ticket_dao}") > 0:
+      logging.info(f"loaded '{ticket_dao}' tickets correctly")
+      return True
+    else:
+      raise Exception("tickets data wasn't loaded properly")
 
   @staticmethod
   def validate_input(key_name, value):
