@@ -54,6 +54,7 @@ class SearchApp:
             logging.warning(f"{user.get('_id')} doesn't have an organization_id")
             if config.FULL_RELATIONAL:
               self.user_dao.users.remove(user)
+            break
           else:
             org = SearchAPI.search_org_by_id(self.org_dao, organization_id)
             logging.debug(f"ok: {user.get('name')} -> {org.get('name')}")
@@ -78,7 +79,7 @@ class SearchApp:
           logging.warning(f"{e}, can't link ticket id {ticket.get('_id')},has invalid organization_id")
           if config.FULL_RELATIONAL:
             self.ticket_dao.tickets.remove(ticket)
-          continue
+          break
       # 2. link tickets to submitters
       for user in self.user_dao.users:
         try:
@@ -93,7 +94,7 @@ class SearchApp:
           logging.warning(f"{e}, can't link submitter to ticket! {submitter_id} not registered")
           if config.FULL_RELATIONAL:
             self.ticket_dao.tickets.remove(ticket)
-          continue
+          break
       # 3. link tickets to assignees
       for user in self.user_dao.users:
         try:
@@ -108,7 +109,7 @@ class SearchApp:
           logging.warning(f"{e}, can't link assignee to ticket! {assignee_id} not registered")
           if config.FULL_RELATIONAL:
             self.ticket_dao.tickets.remove(ticket)
-          continue
+          break
 
 # search logic
   def search_organisations(self, key_name, value):
