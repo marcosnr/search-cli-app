@@ -1,8 +1,10 @@
+import os
 import json
 import copy
 import logging
 import config
 import yaml
+from datetime import datetime
 
 logger = logging.getLogger()
 logger.setLevel(config.LOG_LEVEL)
@@ -10,7 +12,6 @@ logger.setLevel(config.LOG_LEVEL)
 
 class DataExporter:
   """Export search results in human readable format"""
-
   @staticmethod
   def yaml_print(search_result):
     """prints in a human friendly manner (YAML) a search result object
@@ -41,11 +42,15 @@ class DataExporter:
     Keyword arguments:
     search_result -- result (Dictionary)
     """
-
-    logging.debug(f"items: {type(search_result)}")
-    jsonpretty = json.dumps(search_result, indent=2, default=str)
-    with open(config.DEFAULT_RESULT_URI, 'w') as outfile:
-      json.dump(jsonpretty, outfile)
+    current_dir = os.path.dirname(os.path.realpath(__file__))
+    curr_path = os.path.join(current_dir, config.DEFAULT_RESULT_URI)
+    full_path = curr_path + datetime.strftime(datetime.now(), config.TS_SUFIX) + '.json'
+    print(f"...Exporting search results to-> {full_path}")
+    try:
+      with open(full_path, 'w+', encoding='utf-8') as outfile:
+        json.dump(search_result, outfile)
+    except Exception:
+      raise Exception(f"'{full_path}' could not be written")
 
   @staticmethod
   def export_item(item, export_format):

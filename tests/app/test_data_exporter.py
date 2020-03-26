@@ -34,8 +34,4 @@ def test_yaml_print(capsys,search_results):
     assert  out !=''
     assert  err ==''
 
-def test_exports_json_file(search_results):
-  DataExporter.json_out(search_results)
-  current_dir = os.path.dirname(os.path.realpath(__file__))
-  assert os.path.isfile(config.DEFAULT_RESULT_URI)
 
