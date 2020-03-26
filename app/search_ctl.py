@@ -139,7 +139,11 @@ class SearchApp:
     if isinstance(results, ResultSet):
       org = results.item
       logging.debug(f"found: {org['name']}")
-      DataExporter.export_item(org, export_format)
+      if len(org['users']) > config.MAX_ITEMS_SCREEN | len(org['tickets']) > config.MAX_ITEMS_SCREEN:
+        DataExporter.to_many_to_show()
+        DataExporter.export_item(org, 'file')
+      else:
+        DataExporter.export_item(org, export_format)
     else:
       DataExporter.show_not_found(results)
 
