@@ -1,7 +1,7 @@
 .PHONY: help test run
 PYTHON_INTERPRETER ?= $(shell which python)
 
-default: dependencies install test lint
+default: dependencies install test lint scan
 
 help: ## This help
 	@grep -E -h "^[a-zA-Z_-]+:.*?## " $(MAKEFILE_LIST) \
@@ -25,3 +25,9 @@ lint: ## linting of code base for good practices, E111,E114: identention = 2 tab
 
 	$(info [+] linting with flake8 ...")
 	pipenv run flake8 app --ignore=E111,E114
+
+
+scan: ## security scanning for code vulnerabilities
+
+	$(info [+] security scanning with bandit...")
+	pipenv run bandit -r app

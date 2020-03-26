@@ -2,13 +2,14 @@
 
 Explanation of design decisions and overall roadmap for this app
 
-## Architecture principles
+## Principles
 
-A. Extensibility - separation of concerns.
-B. Simplicity - aim for the simplest solution that gets the job done whilst remaining readable, extensible and testable.
-C. Test Coverage - breaking changes should break your tests.
-D. Performance - should gracefully handle a significant increase in amount of data provided (e.g 10000+ users).
-E. Robustness - should handle and report errors.
+* Extensibility - separation of concerns.
+* Simplicity - aim for the simplest solution that gets the job done whilst remaining readable, extensible and testable.
+* Test Coverage - breaking changes should break your tests.
+* Performance - should gracefully handle a significant increase in amount of data provided (e.g 10000+ users).
+* Robustness - should handle and report errors.
+* *Security and automation* -In order to support all of the previous ones correctly
 
 ## MVC Architecture
 
@@ -54,11 +55,9 @@ In the Sketch below you can see the overall module architecture:
 - Association of list of items according to FKs 
 - Return all related items for a hit
 
-4. Load testing 10k+ items
+* Load testing 10k+ items
 
-(Nice to have if times allows)
-
-* Build automation
+* Build Automation
 
 * "Security job 0" principles as early as possible
 

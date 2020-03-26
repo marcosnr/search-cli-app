@@ -19,11 +19,13 @@ Commands:
 
 ### Prerequisites
 
-Python 3 installed on *Nix OS (Linux, Mac, WSL)
+Python 3 installed on *Nix OS (Linux, Mac, WSL), and connection to the internet to download required libraries.
+- Execute the following comand on a bash terminal
 
 ```bash
-make install 
+make
 ```
+- more info on the automated build, run `make help`
 
 ## Usage
 
@@ -94,15 +96,23 @@ If you want to provide other input, specify relative or full path in `config.py`
 
 ## Test Coverage
 
-```bash
-make test
-```
-
-Linting is done with flake8
+* Running the test suite
 
 ```bash
 make test
 ```
+
+* Linting is done with flake8
+
+```bash
+make test
+```
+* Security Scaning
+
+```bash
+make scan
+```
+
 ## Asumptions
 
 See: [/docs/Assumptions.md](/docs/Assumptions.md)
