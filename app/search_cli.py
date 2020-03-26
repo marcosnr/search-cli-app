@@ -31,7 +31,7 @@ def organisations(field, value, export_format):
   app.load_data()
   results = app.search_organisations(field, value)
   logging.debug(f"results={results}")
-  app.export(results, export_format)
+  app.export_org(results, export_format)
 
 
 @click.command(help='search for a user of an organization ticketing system')
@@ -51,7 +51,7 @@ def users(field, value, export_format):
   app.load_data()
   results = app.search_users(field, value)
   logging.debug(f"results={results}")
-  app.export(results, export_format)
+  app.export_user(results, export_format)
 
 
 if __name__ == '__main__':

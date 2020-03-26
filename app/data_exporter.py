@@ -45,3 +45,21 @@ class DataExporter:
     jsonpretty = json.dumps(search_result, indent=2, default=str)
     with open(config.DEFAULT_RESULT_URI, 'w') as outfile:
       json.dump(jsonpretty, outfile)
+
+  @staticmethod
+  def export_item(item, export_format):
+    """Exports Model Item
+
+    Keyword arguments:
+    item -- resource to export
+    export_format -- export type format
+    """
+    logging.debug(f"format: '{export_format}' ")
+    if export_format == 'json':
+      DataExporter.pretty_print(item)
+    elif export_format == 'yaml':
+      DataExporter.yaml_print(item)
+    elif export_format == 'file':
+      DataExporter.json_out(item)
+    else:
+      raise Exception("Export format not supported")

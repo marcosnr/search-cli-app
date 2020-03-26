@@ -1,5 +1,6 @@
 import logging
 import config
+import copy
 from validator import Validator
 from search_api import SearchAPI
 from result_set import ResultSet
@@ -32,8 +33,6 @@ class SearchApp:
         try:
           org = SearchAPI.search_org_by_id(self.org_dao, user.get("organization_id"))
           logging.debug(f"linking {user['name']} -> {org['name']}")
-          logging.debug(f"org..> '{org}'")
-          logging.debug(f"done..? '{org.get('users')}'")
           org['users'].append(user)
         except Exception as e:
           logging.error(f"{e}, can't link user id {user['_id']}")
@@ -73,24 +72,37 @@ class SearchApp:
     Validator.validate_input(key_name, value)
     return SearchAPI.search_user_by_field(self.user_dao, key_name, value)
 
-  def export(self, results, export_format):
-    """Exports results
+# exporter logic
+
+  def export_org(self, results, export_format):
+    """Exports Organization
 
     Keyword arguments:
     results -- resource to export
     export_format -- export type format
     """
     if isinstance(results, ResultSet):
-      logging.debug(f"found: {results.item['name']}")
-      logging.debug(f"items: {results.item}")
-      logging.debug(f"format: '{export_format}' ")
-      if export_format == 'json':
-        DataExporter.pretty_print(results.item)
-      elif export_format == 'yaml':
-        DataExporter.yaml_print(results.item)
-      elif export_format == 'file':
-        DataExporter.json_out(results.item)
-      else:
-        raise Exception("Export format not supported")
+      org = results.item
+      logging.debug(f"found: {org['name']}")
+      DataExporter.export_item(org, export_format)
+    else:
+      print(f"Oops! {results} found, want to try again?")
+
+  def export_user(self, results, export_format):
+    """Exports Organization
+
+    Keyword arguments:
+    user -- user to export
+    export_format -- export type format
+    """
+    if isinstance(results, ResultSet):
+      user = results.item
+      logging.debug(f"found: {user['name']}")
+      DataExporter.export_item(user, export_format)
+      org = SearchAPI.search_org_by_id(self.org_dao, user.get("organization_id"))
+      print(f"-------> User belongs to ORG[{org['name']}]::")
+      copy_org = copy.deepcopy(org)
+      del copy_org['users']
+      DataExporter.export_item(copy_org, export_format)
     else:
       print(f"Oops! {results} found, want to try again?")

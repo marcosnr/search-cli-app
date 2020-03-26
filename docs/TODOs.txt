@@ -6,7 +6,7 @@ DONE Load users and find by ID
 DONE find by ANY field in users
 DONE including boolean  "suspended": 'True'
 DONE users assign to vector in orgdao and return users when search for org
-return org when searching for user
+DONE return org when searching for user
 
 Load tickets and find by ID
 find by ANY field in tickets
@@ -55,3 +55,4 @@ README:
 complete setup
 complete usage and assumptions: returns only first hit
 Why logging, security, ci is job 0, bandit, commit signed
+for UX purposes, some prints are in ctl layer, they should not be there, but would required a bit of refactoring
