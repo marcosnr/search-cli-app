@@ -9,7 +9,7 @@ def runner():
 
 #organisations
 def test_organisations_by_id(runner):
-    result = runner.invoke(organisations, ["--field", "_id", "--value", "102"])
+    result = runner.invoke(organisations, ["--field", "_id", "--value", "101"])
     assert result.exit_code == 0
 
 def test_organisations_by_name(runner):
@@ -29,7 +29,7 @@ def test_organisations_no_value(runner):
     assert result.exit_code == 0
 
 def test_organisations_by_missing_optional(runner):
-    result = runner.invoke(organisations, ["--value", "102"])
+    result = runner.invoke(organisations, ["--value", "101"])
     assert result.exit_code == 0
 
 def test_organisations_by_missing_required_argument(runner):
@@ -42,34 +42,4 @@ def test_organisations_by_empty_details(runner):
 
 def test_organisations_by_tags(runner):
     result = runner.invoke(organisations, ["--field", "tags", "--value", "Fulton"])
-    assert result.exit_code == 0
-
-# users
-def test_users_by_id(runner):
-    result = runner.invoke(users, ["--field", "_id", "--value", "75"])
-    assert result.exit_code == 0
-
-def test_users_by_name(runner):
-    result = runner.invoke(users, ["--field", "name", "--value", "Francisca Rasmussen"])
-    assert result.exit_code == 0
-
-def test_users_by_tags(runner):
-    result = runner.invoke(users, ["--field", "tags", "--value", "Hartsville/Hartley"])
-    assert result.exit_code == 0
-
-def test_users_by_activity(runner):
-    result = runner.invoke(users, ["--field", "active", "--value", "false"])
-    assert result.exit_code == 0
-
-# tickets
-def test_tickets_by_id(runner):
-    result = runner.invoke(tickets, ["--field", "_id", "--value", "1a227508-9f39-427c-8f57-1b72f3fab87c"])
-    assert result.exit_code == 0
-
-def test_tickets_by_subject(runner):
-    result = runner.invoke(tickets, ["--field", "subject", "--value", "A Catastrophe in Micronesia"])
-    assert result.exit_code == 0
-
-def test_tickets_by_tags(runner):
-    result = runner.invoke(tickets, ["--field", "tags", "--value", "Puerto Rico"])
     assert result.exit_code == 0

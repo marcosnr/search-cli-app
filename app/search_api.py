@@ -21,8 +21,8 @@ class SearchAPI:
     """
     logging.debug(f"search_org_by_id: {org_id}")
     for org in org_dao.organizations:
-      if org['_id'] == int(org_id):
-        logging.debug(f"Found {org['name']}")
+      if str(org.get("_id")) == str(org_id):
+        logging.debug(f"Found {org.get('name')}")
         return org
     raise Exception(f"org_id: {org_id} not found in Datastore")
 
@@ -72,8 +72,8 @@ class SearchAPI:
     """
     logging.debug(f"search_user_by_id: {user_id}")
     for user in user_dao.users:
-      if user['_id'] == int(user_id):
-        logging.debug(f"Found {user['name']}")
+      if str(user.get("_id")) == str(user_id):
+        logging.debug(f"Found {user.get('name')}")
         return user
     raise Exception(f"user_id: {user_id} not found in Datastore")
 
@@ -120,7 +120,7 @@ class SearchAPI:
     """
     logging.debug(f"search_ticket_by_id: {ticket_id}")
     for ticket in ticket_dao.tickets:
-      if ticket['_id'] == ticket_id:
+      if str(ticket.get("_id")) == str(ticket_id):
         logging.debug(f"Found '{ticket['subject']}'")
         return ticket
     raise Exception(f"ticket_id: {ticket_id} not found in Datastore")

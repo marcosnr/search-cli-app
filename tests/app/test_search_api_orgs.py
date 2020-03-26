@@ -38,7 +38,7 @@ def search_data():
 def test_search_org_by_id(search_data):
   org = SearchAPI.search_org_by_id(search_data.org_dao, 101)
   assert isinstance(org, dict)
-  assert org['name'] == 'Enthaze'
+  assert org.get('name') == 'Enthaze'
   with pytest.raises(Exception):
     org_result = SearchAPI.search_org_by_id(search_data.org_dao, 102)
 

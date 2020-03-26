@@ -44,33 +44,37 @@ class SearchApp:
 
   def link_users(self):
     """Link users to their respective organizations"""
-    logging.debug("linking users with organizations...")
+    logging.debug(">>> linking users with organizations...")
     for user in self.user_dao.users:
       for org in self.org_dao.organizations:
         try:
-          org = SearchAPI.search_org_by_id(self.org_dao, user.get("organization_id"))
-          logging.debug(f"linking {user['name']} -> {org['name']}")
-          org['users'].append(user)
+          organization_id = user.get("organization_id")
+          if organization_id == 'None':
+            logging.warning(f"{user.get('_id')} doesn't have an organization_id")
+            if config.FULL_RELATIONAL:
+              self.user_dao.users.remove(user)
+          else:
+            org = SearchAPI.search_org_by_id(self.org_dao, organization_id)
+            logging.debug(f"ok: {user.get('name')} -> {org.get('name')}")
+            org['users'].append(user)
         except Exception as e:
-          logging.warning(f"{e}, can't link user id {user.get('_id')}")
-          logging.warning(f"{user.get('_id')} has invalid organization_id")
+          logging.warning(f"{e}, can't link user id {user.get('_id')},  invalid organization_id")
           if config.FULL_RELATIONAL:
             self.user_dao.users.remove(user)
           continue
 
   def link_tickets(self):
     """Link tickets to their respective organizations and users"""
-    logging.debug("linking tickets with organizations...")
+    logging.debug("+++ linking tickets with organizations...")
     for ticket in self.ticket_dao.tickets:
       # 1. link tickets to orgs
       for org in self.org_dao.organizations:
         try:
-          logging.debug(f"linking {ticket.get('_id')} -> {org['name']}")
+          logging.debug(f"1.t->o {ticket.get('_id')} -> {org.get('name')}")
           org = SearchAPI.search_org_by_id(self.org_dao, ticket.get("organization_id"))
           org['tickets'].append(ticket)
         except Exception as e:
-          logging.warning(f"{e}, can't link ticket id {ticket['_id']}")
-          logging.warning(f"{ticket['_id']} has invalid organization_id: {ticket.get('organization_id')}")
+          logging.warning(f"{e}, can't link ticket id {ticket.get('_id')},has invalid organization_id")
           if config.FULL_RELATIONAL:
             self.ticket_dao.tickets.remove(ticket)
           continue
@@ -79,14 +83,13 @@ class SearchApp:
         try:
           submitter_id = ticket.get("submitter_id")
           if submitter_id == 'None':
-            logging.debug(f"tck_id: {ticket['_id']} doesn't have a submitter")
+            logging.debug(f"tck_id: {ticket.get('_id')} doesn't have a submitter")
           else:
             submitter = SearchAPI.search_user_by_id(self.user_dao, submitter_id)
-            logging.debug(f"linking submitter tck_id: {ticket['_id']} -> user_id {user['_id']}")
+            logging.debug(f"2.t->s submitter tck_id: {ticket.get('_id')} -> user_id {user['_id']}")
             submitter['tickets_submitted'].append(ticket)
         except Exception as e:
-          logging.warning(f"{e}, can't link submitter to ticket!")
-          logging.warning(f"submitter_id: {submitter_id} can't be found among registered users")
+          logging.warning(f"{e}, can't link submitter to ticket! {submitter_id} not registered")
           if config.FULL_RELATIONAL:
             self.ticket_dao.tickets.remove(ticket)
           continue
@@ -95,14 +98,13 @@ class SearchApp:
         try:
           assignee_id = ticket.get("assignee_id")
           if assignee_id == 'None':
-            logging.debug(f"tck_id: {ticket['_id']} doesn't have an assignee")
+            logging.debug(f"tck_id: {ticket.get('_id')} doesn't have an assignee")
           else:
             assignee = SearchAPI.search_user_by_id(self.user_dao, assignee_id)
-            logging.debug(f"linking assignee tck_id: {ticket['_id']} -> user_id {user['_id']}")
+            logging.debug(f"+3.t->a assignee tck_id: {ticket.get('_id')} -> user_id {user['_id']}")
             assignee['tickets_assigned'].append(ticket)
         except Exception as e:
-          logging.warning(f"{e}, can't link assignee to ticket!")
-          logging.warning(f"assignee_id: {assignee_id} can't be found among registered users")
+          logging.warning(f"{e}, can't link assignee to ticket! {assignee_id} not registered")
           if config.FULL_RELATIONAL:
             self.ticket_dao.tickets.remove(ticket)
           continue
@@ -156,7 +158,7 @@ class SearchApp:
     DataExporter.show_header('ORGANIZATION')
     if isinstance(results, ResultSet):
       org = results.item
-      logging.debug(f"found: {org['name']}")
+      logging.debug(f"found: {org.get('name')}")
       if len(org['users']) > config.MAX_ITEMS_SCREEN | len(org['tickets']) > config.MAX_ITEMS_SCREEN:
         DataExporter.to_many_to_show()
         DataExporter.export_item(org, 'file')
@@ -175,10 +177,14 @@ class SearchApp:
     DataExporter.show_header('USER')
     if isinstance(results, ResultSet):
       user = results.item
-      logging.debug(f"found: {user['name']}")
+      logging.debug(f"found: {user.get('name')}")
       DataExporter.export_item(user, export_format)
-      org = SearchAPI.search_org_by_id(self.org_dao, user.get("organization_id"))
-      DataExporter.show_org_relation(org, export_format)
+      organization_id = user.get("organization_id")
+      if organization_id == 'None':
+        logging.warning(f"{user.get('_id')} doesn't have an organization_id")
+      else:
+        org = SearchAPI.search_org_by_id(self.org_dao, user.get("organization_id"))
+        DataExporter.show_org_relation(org, export_format)
     else:
       DataExporter.show_not_found(results)
 
@@ -192,13 +198,26 @@ class SearchApp:
     DataExporter.show_header('TICKET')
     if isinstance(results, ResultSet):
       ticket = results.item
-      logging.debug(f"found: {ticket['subject']}")
+      logging.debug(f"printing ticket: {ticket.get('_id')}")
       DataExporter.export_item(ticket, export_format)
-      submitter = SearchAPI.search_user_by_id(self.user_dao, ticket.get("submitter_id"))
-      assignee = SearchAPI.search_user_by_id(self.user_dao, ticket.get("assignee_id"))
-      DataExporter.show_user_relation(submitter, 'submitter', export_format)
-      DataExporter.show_user_relation(assignee, 'assignee', export_format)
-      org = SearchAPI.search_org_by_id(self.org_dao, ticket.get("organization_id"))
-      DataExporter.show_org_relation(org, export_format)
+      submitter_id = ticket.get("submitter_id")
+      if submitter_id == 'None':
+        logging.info(f"tck_id: {ticket.get('_id')} doesn't have a submitter")
+      else:
+        submitter = SearchAPI.search_user_by_id(self.user_dao, submitter_id)
+        DataExporter.show_user_relation(submitter, 'submitter', export_format)
+      assignee_id = ticket.get("assignee_id")
+      if assignee_id == 'None':
+        logging.debug(f"tck_id: {ticket.get('_id')} doesn't have an assignee")
+      else:
+        assignee = SearchAPI.search_user_by_id(self.user_dao, assignee_id)
+        DataExporter.show_user_relation(assignee, 'assignee', export_format)
+      # print org
+      organization_id = ticket.get("organization_id")
+      if organization_id == 'None':
+        logging.warning(f"{ticket.get('_id')} doesn't have an organization_id")
+      else:
+        org = SearchAPI.search_org_by_id(self.org_dao, ticket.get("organization_id"))
+        DataExporter.show_org_relation(org, export_format)
     else:
       DataExporter.show_not_found(results)

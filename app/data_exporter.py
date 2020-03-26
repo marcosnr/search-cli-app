@@ -74,7 +74,7 @@ class DataExporter:
 
   @staticmethod
   def show_org_relation(org, export_format):
-      print(f"******* Ticket belongs to ORG: [{org['name']}]::")
+      print(f"******* Ticket belongs to ORG: [{org.get('name')}]::")
       copy_org = copy.deepcopy(org)
       del copy_org['users']
       del copy_org['tickets']
@@ -83,9 +83,9 @@ class DataExporter:
   @staticmethod
   def show_user_relation(user, type, export_format):
     if type == 'submitter':
-        print(f"<<<<< Ticket was submitted by: [{user['name']}]::")
+        print(f"<<<<< Ticket was submitted by: [{user.get('name')}]::")
     else:
-        print(f">>>>> Ticket is assigned to: [{user['name']}]::")
+        print(f">>>>> Ticket is assigned to: [{user.get('name')}]::")
     copy_user = copy.deepcopy(user)
     del copy_user['tickets_assigned']
     del copy_user['tickets_submitted']

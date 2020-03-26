@@ -15,8 +15,10 @@ class Validator:
     for org in org_dao.organizations:
       value = org.get('_id')
       if value == 'None':
+        logging.warning(f"'{org.get('name')}' doesn't have '_id' NOT loading!")
         org_dao.remove(org)
-      logging.debug(f"'{org['name']}' ok, init users list...")
+        continue
+      logging.debug(f"'{org.get('name')}' ok, init users list...")
       # creating future relationship holders
       org.update({'users': []})
       org.update({'tickets': []})
@@ -34,7 +36,9 @@ class Validator:
     for user in user_dao.users:
       value = user.get('_id')
       if value == 'None':
+        logging.warning(f"'{user.get('name')}' doesn't have '_id' NOT loading!")
         user_dao.remove(user)
+        continue
       # creating future relationship holders
       user.update({'tickets_assigned': []})
       user.update({'tickets_submitted': []})
@@ -52,7 +56,9 @@ class Validator:
     for ticket in ticket_dao.tickets:
       value = ticket.get('_id')
       if value == 'None':
+        logging.warning(f"'{ticket.get('subject')}' doesn't have '_id' NOT loading!")
         ticket_dao.remove(ticket)
+        continue
     # are there any remaining valid tickets?
     if int(f"{ticket_dao}") > 0:
       logging.info(f"loaded '{ticket_dao}' tickets correctly")

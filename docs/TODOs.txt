@@ -18,22 +18,20 @@ DONE return tickets when search for user
 DONE check if result too big default to json file
 DONE check export to json (no test) and modify prompt
 DONE check FKs are present at load time
-check with given data
-check PK are present when loading!!!!
+DONE check PK are present when loading!!!!
+DONE check name r rpesent org users
 check FK of tickets to Users
+cechk max items and 2 file!
+...with given data
 check user id 16 (no org)
 check ticket e68d8bfd-9826-42fd-9692-add445aa7430 (no org id, no submitter)
 
-check org['name'] and other assumptions with get better
+check org.get('name') and other assumptions with get better
 check with real data? python app/search_cli.py users --field '_id' --value 1
-has this weird print:
- - *id002
-tickets_submitted:
-- *id002
-- *id002
 check no clash org with org same name in linking!
 
 update README:
+  PK will not load, FK optional config
   add readme does not support tags [] empty (I asked!)
   complete setup
   complete usage and assumptions: returns only first hit

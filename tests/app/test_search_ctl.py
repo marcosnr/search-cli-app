@@ -25,14 +25,14 @@ def test_ctl_load(app):
   assert isinstance(app.ticket_dao, TicketDAO)
 
 def test_ctl_org_by_id(app):
-  org_result = app.search_organisations("_id", 102)
-  assert org_result.item['name'] == 'Nutralab'
+  org_result = app.search_organisations("_id", 101)
+  assert org_result.item['name'] == 'Enthaze'
   with pytest.raises(Exception):
     app.search_organisations("_id", 99)
 
 def test_ctl_user_by_id(app):
-  org_result = app.search_users("_id", 75)
-  assert org_result.item['name'] == 'Catalina Simpson'
+  org_result = app.search_users("_id", 1)
+  assert org_result.item['name'] == 'Francisca Rasmussen'
   with pytest.raises(Exception):
     app.search_users("_id", -1)
 
