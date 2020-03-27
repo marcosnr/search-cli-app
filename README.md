@@ -1,3 +1,5 @@
+[<img src="https://github.com/marcosnr/search-cli-app/workflows/build/badge.svg" alt="build_status" width="200"/>](https://github.com/marcosnr/search-cli-app/actions)
+
 # Zen CLI Search App
 
 "Mies Van der Rohe's style" Search CLI App. 
