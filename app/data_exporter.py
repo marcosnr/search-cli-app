@@ -34,7 +34,7 @@ class DataExporter:
     """
 
     logging.debug(f"items: {len(search_result)}")
-    print(json.dumps(search_result, indent=2, default=str))
+    print(json.dumps(search_result, indent=2, default=str, ensure_ascii=False))
 
   @staticmethod
   def json_out(search_result):
@@ -47,10 +47,10 @@ class DataExporter:
     current_dir = os.path.dirname(os.path.realpath(__file__))
     curr_path = os.path.join(current_dir, config.DEFAULT_RESULT_URI)
     full_path = curr_path + datetime.strftime(datetime.now(), config.TS_SUFIX) + '.json'
-    print(f"...Exporting search results to-> {full_path}")
+    print(f"...Exporting results to-> {curr_path}{config.TS_SUFIX}.json, check relevant file(s)")
     try:
       with open(full_path, 'w+', encoding='utf-8') as outfile:
-        json.dump(search_result, outfile)
+        json.dump(search_result, outfile, ensure_ascii=False)
     except Exception:
       raise Exception(f"'{full_path}' could not be written")
 

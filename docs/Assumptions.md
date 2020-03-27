@@ -21,3 +21,4 @@ will *NOT* return "mary", "Mary", "MarCos", "marc", "Amar"
 
 * Assume I have access to the public Internet to download public libraries
 
+* For big result queries export to json file is reccomended, but result will be split in 1 two 3 files, depending on relationships found (see Design for remediation)
