@@ -32,9 +32,12 @@ In the Sketch below you can see the overall module architecture:
 ## guidelines
 
 * TDD Approach. First tests must fail, only then create back end that meets criteria
-* Clear git commit history showing TDD 
 * Early integration
 * Early and clear documentation
+* Clear git commit history showing good practices, as seen with:
+```bash
+git log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --date=relative)
+```
 
 ## Future backlog (e.g. known issues in the present)
 
