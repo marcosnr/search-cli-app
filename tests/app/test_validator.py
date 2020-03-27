@@ -1,8 +1,7 @@
 import pytest
 
-from search import SearchAPI
+from validator import Validator
 from models import OrganizationDAO
-
 
 @pytest.fixture
 def search_data():
@@ -32,12 +31,7 @@ def search_data():
   test_org_dao = OrganizationDAO()
   test_org_dao.organizations = test_org_data
   search_data.org_dao = test_org_dao
-  #TODO expand later to Mocks / other daos
   return search_data
 
-def test_search_org_by_id(search_data):
-  org_result = SearchAPI.search_org_by_id(search_data.org_dao, 101)
-  assert type(org_result) is dict
-  with pytest.raises(Exception):
-    org_result = SearchAPI.search_org_by_id(search_data.org_dao, 102)
-
+def test_validate_data(search_data):
+  assert Validator.validate_org_data(search_data.org_dao) is True

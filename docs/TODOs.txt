@@ -1,0 +1,81 @@
+CORE:
+DONE find by ANY field in ANY org
+DONE including if field is empty
+DONE including in tags
+DONE Load users and find by ID
+DONE find by ANY field in users
+DONE including boolean  "suspended": 'True'
+DONE users assign to vector in orgdao and return users when search for org
+DONE return org when searching for user
+DONE show inheritance with EMPTY_RESULT_SET
+DONE Load tickets and find by ID
+DONE tickets assign to vector in orgdao
+DONE find by ANY field in tickets
+DONE return org when searching for ticket
+DONE return users when searching for 
+DONE return tickets when search for org
+DONE return tickets when search for user
+DONE check if result too big default to json file
+DONE check export to json (no test) and modify prompt
+DONE check FKs are present at load time
+DONE check PK are present when loading!!!!
+DONE check name r rpesent org users
+DONE check FK of tickets to Users
+
+why orgs in real data have repeated users? :'(
+python app/search_cli.py organisations --value "Enthaze" > out
+
+ticket for users should not print org:
+python app/search_cli.py users --field role --value "admin"
+
+unicode in yaml:
+python app/search_cli.py tickets --field 'subject' --value "A Catastrophe in Korea (North)"
+
+cechk max items and 2 file!
+...with given data
+check user id 16 (no org)
+check ticket e68d8bfd-9826-42fd-9692-add445aa7430 (no org id, no submitter)
+check when printing org should not print tickets twice, on org and on users
+check org.get('name') and other assumptions with get better
+check with real data? python app/search_cli.py users --field '_id' --value 1
+check no clash org with org same name in linking!
+
+Readme more:
+Why logging, security, ci is job 0, bandit, commit signed
+ctl getting big, could be modularise further
+for UX purposes, some prints are in ctl layer, they should not be there, but would required a bit of refactoring
+
+NOT_SO_CORE:
+repeated items by id
+complete tests for validator and ctl
+
+ask if needs only name id or full result (for org would be big result)
+
+Validate:
+id string is number is UUID xcheck
+items with no iditems with no fk!
+Custom  exceptions for not found and handling
+makefile validate prereqs
+
+import:
+interface to load other input from the given one
+
+export:
+append timesatamp to export json file
+beeprint not good, prettyprint better
+
+ci:
+create github action pipeline
+create bin exec
+
+.flake8 ?
+testing:
+use mocks
+
+enhancements:
+search for a user field inside an org (recursive search)
+search by time range
+code more DRY
+cli tests capturing ouptut print
+ascii art, it's but one line in the exporter!
+
