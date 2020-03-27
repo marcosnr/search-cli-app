@@ -57,13 +57,28 @@ class SearchApp:
             break
           else:
             org = SearchAPI.search_org_by_id(self.org_dao, organization_id)
-            logging.debug(f"ok: {user.get('name')} -> {org.get('name')}")
-            org['users'].append(user)
+            self.add_user_to_org(user, org)
         except Exception as e:
           logging.warning(f"{e}, can't link user id {user.get('_id')}")
           if config.FULL_RELATIONAL:
             self.user_dao.users.remove(user)
           continue
+
+  def add_user_to_org(self, user, org):
+    # Check user has not been added already...
+    logging.debug(f"adding {user.get('name')} to {org.get('name')}")
+    existing_users = org.get('users')
+    # base case
+    if existing_users is None:
+      org['users'].append(user)
+    else:
+      for existing_user in existing_users:
+        if str(existing_user.get("_id")) == str(user.get("_id")):
+          logging.debug(f"{user.get('_id')} exists")
+          return True
+      org['users'].append(user)
+      logging.debug(f"ok: {user.get('name')} -> {org.get('name')}")
+    # a new one, let's add it
 
   def link_tickets(self):
     """Link tickets to their respective organizations and users"""
@@ -183,6 +198,7 @@ class SearchApp:
     user -- user to export
     export_format -- export type format
     """
+    logging.info(f"show_header")
     DataExporter.show_header('USER')
     if isinstance(results, ResultSet):
       user = results.item

@@ -13,6 +13,7 @@ jobs:
           architecture: 'x64'
       - run: pip install pipenv
       - run: pipenv install --dev
+      - run: pipenv install more_itertools
       - run: pipenv run pytest
   flake8:
     name: linting

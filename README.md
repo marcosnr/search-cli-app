@@ -44,7 +44,7 @@ Specify `--value` and (optional) `--field` arguments:
 Results will be shown in the console in human readable format (`yaml`)
 
 * Alternatively you can specify to save them in a `.json` file, with `--export-format file`
-(Recommended for big organizations)
+(Recommended for big organizations and / or special character encoding)
 
 ```bash
 ./bin/search_cli organisations --value "Terrasys" --export-format file

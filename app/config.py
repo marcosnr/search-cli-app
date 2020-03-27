@@ -10,7 +10,7 @@ ERROR = 40
 # Default log Level
 FILE_LOG_LEVEL = ERROR
 LOG_LEVEL = ERROR
-LOG_FORMAT = '%(asctime)s - %(levelname)s -%(funcName)s - %(message)s'
+LOG_FORMAT = '%(asctime)s - %(levelname)s - %(funcName)s - %(message)s'
 LOG_FILE = 'search_app.log'
 # Default configuration
 DEFAULT_ORG_DATA = 'assets/organizations.json'
