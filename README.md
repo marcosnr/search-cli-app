@@ -6,7 +6,7 @@
 Simple and modular text search match on relational json input data
 
 ```bash
-python app/search_cli.py  --help
+./bin/search_cli --help
 Usage: search_cli.py [OPTIONS] COMMAND [ARGS]...
 
 Options:
@@ -40,7 +40,7 @@ Begin a `pipenv shell` environment to ensure all runtime libraries are present (
 Specify `--value` and (optional) `--field` arguments:
 
 ```bash
-python app/search_cli.py users --field role --value admin
+./bin/search_cli users --field role --value admin
 ```
 
 Results will be shown in the console in human readable format (`yaml`)
@@ -49,7 +49,7 @@ Results will be shown in the console in human readable format (`yaml`)
 (Recommended for big organizations and / or special character encoding)
 
 ```bash
-python app/search_cli.py organisations --value "Terrasys" --export-format file
+./bin/search_cli organisations --value "Terrasys" --export-format file
 ```
 
 ### Notes
@@ -57,25 +57,31 @@ python app/search_cli.py organisations --value "Terrasys" --export-format file
 *  If `--field` is not provided, for organizations and users `name` will be assumed (`--field name`)
 
 ```bash
-python app/search_cli.py users --field '_id' --value 35
+./bin/search_cli users --field '_id' --value 35
 ```
 
 for tickets (`--field subject`) will be assumed. 
 
 ```bash
-python app/search_cli.py  tickets --value "A Catastrophe in Micronesia"
+./bin/search_cli tickets --value "A Catastrophe in Micronesia"
 ```
 
 * If your query has spaces or should match empty, surround it with quotes:
 ```bash
-python app/search_cli.py  users --value "Woodard Burt"
+./bin/search_cli users --value "Woodard Burt"
 ```
 or
 ```bash
-python app/search_cli.py tickets --field 'description' --value ''
+./bin/search_cli tickets --field 'description' --value ''
 ```
 
 * More info with `[subcommand] --help` 
+
+```bash
+./bin/search_cli organisations --help
+```
+
+* if you don't want to execute this `./bin/search_cli` or give `+x` permissions, all commands can be replaced with `python app/search_cli.py`, as in:
 
 ```bash
 python app/search_cli.py organisations --help
