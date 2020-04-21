@@ -151,17 +151,16 @@ class SearchAPI:
         continue
       elif isinstance(value, list):
         # search inside list, e.g. 'tags'
-        logging.debug(f"{field} is of list type")
+        logging.debug(f"{value} is of list type")
         for iter in value:
-          logging.debug(f"{field} is iter")
           if iter == search_value:
-            logging.debug(f"{field} found as {search_value}")
             result = ticket
       elif value == search_value:
-        logging.debug(f"{field} alternative as {search_value}")
         result = ticket
       elif isinstance(value, bool):
-        logging.debug(f"{field} is bolean")
-        result = ticket
+        logging.debug(f"{value} is same bool equivalent as {search_value}?")
+        if str(value) == search_value:
+          logging.debug(f"yes it is")
+          result = ticket
       if result is not None:
         return ResultSet(ticket, field, search_value)
