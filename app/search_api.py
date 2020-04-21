@@ -54,7 +54,10 @@ class SearchAPI:
       elif value == search_value:
         result = org
       elif isinstance(value, bool):
-        result = org
+        logging.debug(f"{value} is same bool equivalent as {search_value}?")
+        if str(value) == search_value:
+          logging.debug(f"yes it is")
+          result = org
       if result is not None:
         return ResultSet(org, field, search_value)
 
