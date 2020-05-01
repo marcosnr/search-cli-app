@@ -1,8 +1,8 @@
 [<img src="https://github.com/marcosnr/search-cli-app/workflows/build/badge.svg" alt="build_status" width="200"/>](https://github.com/marcosnr/search-cli-app/actions)
 
-# Zen CLI Search App
+# CLI Search App
 
-"Mies Van der Rohe's style" Search CLI App. 
+"Mies Van der Rohe's style" Search CLI App. To Dust off and correct "old programmer's habits" of Java into Python
 Simple and modular text search match on relational json input data
 
 ```bash
@@ -115,10 +115,6 @@ make test
 make scan
 ```
 
-## Asumptions
-
-See: [/docs/Assumptions.md](/docs/Assumptions.md)
-
-## Design principles and Roadmap
+## Design principles
 
 See: [/docs/Design.md](/docs/Design.md)

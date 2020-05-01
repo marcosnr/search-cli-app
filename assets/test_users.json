@@ -1,7 +1,7 @@
 [
   {
     "_id": 1,
-    "url": "http://initech.zendesk.com/api/v2/users/1.json",
+    "url": "http://initech.company.com/api/v2/users/1.json",
     "external_id": "74341f74-9c79-49d5-9611-87ef9b6eb75f",
     "name": "Francisca Rasmussen",
     "alias": "Miss Coffey",
@@ -27,7 +27,7 @@
   },
   {
     "_id": 2,
-    "url": "http://initech.zendesk.com/api/v2/users/2.json",
+    "url": "http://initech.company.com/api/v2/users/2.json",
     "external_id": "c9995ea4-ff72-46e0-ab77-dfe0ae1ef6c2",
     "name": "Cross Barlow",
     "alias": "Miss Joni",
@@ -53,7 +53,7 @@
   },
   {
     "_id": 16,
-    "url": "http://initech.zendesk.com/api/v2/users/16.json",
+    "url": "http://initech.company.com/api/v2/users/16.json",
     "external_id": "08b3023c-c5c6-4acf-8256-8d091687505e",
     "name": "Woodard Burt",
     "alias": "Miss Michael",
