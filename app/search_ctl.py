@@ -209,7 +209,7 @@ class SearchApp:
         logging.warning(f"{user.get('_id')} doesn't have an organization_id")
       else:
         org = SearchAPI.search_org_by_id(self.org_dao, user.get("organization_id"))
-        DataExporter.show_org_relation(org, export_format)
+        # DataExporter.show_org_relation(org, export_format)
     else:
       DataExporter.show_not_found(results)
 

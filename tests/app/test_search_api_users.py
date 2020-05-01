@@ -87,3 +87,9 @@ def test_search_user_by_bool_field(search_data):
   user_result_set = SearchAPI.search_user_by_field(search_data.user_dao, 'suspended', 'False')
   assert isinstance(user_result_set, ResultSet)
   assert user_result_set.item['signature'] == "Don't Worry Be Happy!"
+
+def test_search_user_by_bool_field(search_data):
+  user_result_set = SearchAPI.search_user_by_field(search_data.user_dao, 'active', 'False')
+  print(user_result_set)
+  assert isinstance(user_result_set, ResultSet)
+  assert user_result_set.item['active'] == False
