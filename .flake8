@@ -1,3 +1,4 @@
+# E111,E114: indetention = 2 tabs, not 4
 [flake8]
 ignore = E111,E114
 exclude = .git

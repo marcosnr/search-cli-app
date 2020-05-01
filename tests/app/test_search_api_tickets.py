@@ -10,7 +10,7 @@ def search_data():
   test_ticket_data =	 [
     {
       "_id": "436bf9b0-1147-4c0a-8439-6f79833bff5b",
-      "url": "http://initech.zendesk.com/api/v2/tickets/436bf9b0-1147-4c0a-8439-6f79833bff5b.json",
+      "url": "http://initech.company.com/api/v2/tickets/436bf9b0-1147-4c0a-8439-6f79833bff5b.json",
       "external_id": "9210cdc9-4bee-485f-a078-35396cd74063",
       "created_at": "2016-04-28T11:19:34 -10:00",
       "type": "incident",
@@ -33,7 +33,7 @@ def search_data():
     },
     {
       "_id": "1a227508-9f39-427c-8f57-1b72f3fab87c",
-      "url": "http://initech.zendesk.com/api/v2/tickets/1a227508-9f39-427c-8f57-1b72f3fab87c.json",
+      "url": "http://initech.company.com/api/v2/tickets/1a227508-9f39-427c-8f57-1b72f3fab87c.json",
       "external_id": "3e5ca820-cd1f-4a02-a18f-11b18e7bb49a",
       "created_at": "2016-04-14T08:32:31 -10:00",
       "type": "incident",

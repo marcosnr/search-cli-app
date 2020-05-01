@@ -8,7 +8,7 @@ def org_dao():
   test_org_data =	 [
     {
       "_id": 101,
-      "url": "http://initech.zendesk.com/api/v2/organizations/101.json",
+      "url": "http://initech.company.com/api/v2/organizations/101.json",
       "external_id": "9270ed79-35eb-4a38-a46f-35725197ea8d",
       "name": "Enthaze",
       "domain_names": [
@@ -37,7 +37,7 @@ def user_dao():
   test_user_data =	 [
     {
       "_id": 18,
-      "url": "http://initech.zendesk.com/api/v2/users/1.json",
+      "url": "http://initech.company.com/api/v2/users/1.json",
       "external_id": "74341f74-9c79-49d5-9611-87ef9b6eb75f",
       "name": "Francisca Rasmussen",
       "alias": "Miss Coffey",
@@ -71,7 +71,7 @@ def ticket_dao():
   test_ticket_data =	 [
     {
       "_id": "436bf9b0-1147-4c0a-8439-6f79833bff5b",
-      "url": "http://initech.zendesk.com/api/v2/tickets/436bf9b0-1147-4c0a-8439-6f79833bff5b.json",
+      "url": "http://initech.company.com/api/v2/tickets/436bf9b0-1147-4c0a-8439-6f79833bff5b.json",
       "external_id": "9210cdc9-4bee-485f-a078-35396cd74063",
       "created_at": "2016-04-28T11:19:34 -10:00",
       "type": "incident",

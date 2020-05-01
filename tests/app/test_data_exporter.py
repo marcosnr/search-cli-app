@@ -9,7 +9,7 @@ from data_exporter import DataExporter
 def search_results():
   search_results = {
       "_id": 101,
-      "url": "http://initech.zendesk.com/api/v2/organizations/101.json",
+      "url": "http://initech.company.com/api/v2/organizations/101.json",
       "external_id": "9270ed79-35eb-4a38-a46f-35725197ea8d",
       "name": "Enthaze",
       "domain_names": [

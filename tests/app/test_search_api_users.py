@@ -10,7 +10,7 @@ def search_data():
   test_user_data =	 [
     {
         "_id": 2,
-        "url": "http://initech.zendesk.com/api/v2/users/2.json",
+        "url": "http://initech.company.com/api/v2/users/2.json",
         "external_id": "c9995ea4-ff72-46e0-ab77-dfe0ae1ef6c2",
         "name": "Cross Barlow",
         "alias": "Miss Joni",
@@ -36,7 +36,7 @@ def search_data():
       },
       {
         "_id": 3,
-        "url": "http://initech.zendesk.com/api/v2/users/3.json",
+        "url": "http://initech.company.com/api/v2/users/3.json",
         "external_id": "85c599c1-ebab-474d-a4e6-32f1c06e8730",
         "name": "Ingrid Wagner",
         "alias": "Miss Buck",
@@ -87,3 +87,9 @@ def test_search_user_by_bool_field(search_data):
   user_result_set = SearchAPI.search_user_by_field(search_data.user_dao, 'suspended', 'False')
   assert isinstance(user_result_set, ResultSet)
   assert user_result_set.item['signature'] == "Don't Worry Be Happy!"
+
+def test_search_user_by_bool_field(search_data):
+  user_result_set = SearchAPI.search_user_by_field(search_data.user_dao, 'active', 'False')
+  print(user_result_set)
+  assert isinstance(user_result_set, ResultSet)
+  assert user_result_set.item['active'] == False

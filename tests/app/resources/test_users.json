@@ -1,7 +1,7 @@
 [
   {
     "_id": 1,
-    "url": "http://initech.zendesk.com/api/v2/users/1.json",
+    "url": "http://initech.company.com/api/v2/users/1.json",
     "external_id": "74341f74-9c79-49d5-9611-87ef9b6eb75f",
     "name": "Francisca Rasmussen",
     "alias": "Miss Coffey",
@@ -27,7 +27,7 @@
   },
   {
     "_id": 75,
-    "url": "http://initech.zendesk.com/api/v2/users/75.json",
+    "url": "http://initech.company.com/api/v2/users/75.json",
     "external_id": "0db0c1da-8901-4dc3-a469-fe4b500d0fca",
     "name": "Catalina Simpson",
     "alias": "Miss Rosanna",

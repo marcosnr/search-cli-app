@@ -18,7 +18,7 @@ class Validator:
         logging.warning(f"'{org.get('name')}' doesn't have '_id' NOT loading!")
         org_dao.remove(org)
         continue
-      logging.debug(f"'{org.get('name')}' ok, init users list...")
+      # logging.debug(f"'{org.get('name')}' ok, init users list...")
       # creating future relationship holders
       org.update({'users': []})
       org.update({'tickets': []})

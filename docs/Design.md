@@ -22,13 +22,6 @@ Model: Data layer with DAO Pattern abstraction for extensibility of Datasources
 By using the `Interface -> Implements` Pattern, Modules will be Implemented by the simplest possible representation, but later can be replaced by other implementation technologies without breaking the contract between modules. e.g.:
 DAO Interface will be implemented by a simple data structure (collections). It can be backed by a more reliable DB Datasource in the future with minimum impact to the other modules.
 
-### Sketch Diagram
-
-In the Sketch below you can see the overall module architecture:
-
-![Alt Module diagram](arch-sketch.png?raw=true "Module diagram")
-
-
 ## guidelines
 
 * TDD Approach. First tests must fail, only then create back end that meets criteria
@@ -54,8 +47,6 @@ git log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(
 * Search by time range
 * Makefile validate prerequisites and fail gracefully
 * CLI Integration tests capturing ouptut print with utf8 encoding proper
-
-
 
 * POC for Extensibility with in memory library:
   - [Marshmellow](https://marshmallow.readthedocs.io/en/stable/nesting.html)
